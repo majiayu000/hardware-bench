@@ -53,6 +53,9 @@ export const BOARDS = [
   },  {
     id: 'keyboard', name: 'Mechanical keyboard build', accent: '#b8569a', level: 'Beginner', language: 'Hands-on',
     blurb: 'Stabilizers, plate, switches and keycaps on a hot-swap kit, then test every key and remap it.',
+  },  {
+    id: 'soldering', name: 'Soldering basics', accent: '#c2951a', level: 'Beginner', language: 'Hands-on',
+    blurb: 'Safety, tinning, a good joint, LEDs and header pins, spotting bad joints and fixing them, on a small LED kit.',
   },
 ];
 
@@ -71,6 +74,7 @@ export const HUB_ZH = {
   'Early release: every pin and command is checked against official documentation, but not every lesson has been run on a real board yet.': '早期版本：每个引脚和命令都对照官方文档核对过，但还不是每节课都在真实板子上跑过。',
   'Found a mistake? Tell us': '发现错误？告诉我们', 'Report a mistake': '报告错误', 'Source code': '源代码',
   'XIAO ESP32S3 Sense': 'XIAO ESP32S3 Sense',
+  'Soldering basics': '焊接入门', 'Safety, tinning, a good joint, LEDs and header pins, spotting bad joints and fixing them, on a small LED kit.': '在一个小 LED 套件上学习：安全、上锡、焊出好焊点、焊 LED 和排针、识别并修复不良焊点。',
   'Mechanical keyboard build': '组装机械键盘', 'Stabilizers, plate, switches and keycaps on a hot-swap kit, then test every key and remap it.': '在热插拔套件上装卫星轴、定位板、轴体和键帽，然后测试每个键，再改键。',
   'A desk-sized AI computer with a CUDA GPU: install JetPack, run language models with Ollama and detect objects from a webcam.': '放在桌上的 AI 电脑，带 CUDA GPU：安装 JetPack，用 Ollama 运行语言模型，再用摄像头检测物体。',
   'PC upgrade: graphics card and SSD': '电脑升级：显卡和固态硬盘', 'Swap a graphics card, add an M.2 NVMe SSD and a SATA SSD, then check everything works.': '换一块显卡，加一块 M.2 NVMe 和一块 SATA 固态硬盘，再检查一切正常。',
