@@ -118,8 +118,9 @@ function checkCircuit(circuit, where) {
     if (!PART_TYPES.includes(p.type)) { err(`${pw}: type "${p.type}" is not one of ${PART_TYPES.join(', ')}`); continue; }
     if (!p.label) warn(`${pw} has no label (shown in popovers and the parts list)`);
     if (p.type === 'module' && p.preset && !MODULE_PRESETS.includes(p.preset)) err(`${pw}: preset must be one of ${MODULE_PRESETS.join(', ')}`);
-    if (p.type === 'servo' && (!p.at || typeof p.at.x !== 'number')) err(`${pw}: servo needs at: { x, z } (it sits on the table)`);
-    if (['camera', 'casepanel', 'casebutton', 'block', 'fan'].includes(p.type) && (!p.at || typeof p.at.x !== 'number')) err(`${pw}: ${p.type} needs at: { x, z }`);
+    if ((p.type === 'servo' || p.type === 'motor') && (!p.at || typeof p.at.x !== 'number')) err(`${pw}: ${p.type} needs at: { x, z } (it sits on the table)`);
+    if (p.type === 'motor' && p.kind && !['tt', 'stepper'].includes(p.kind)) err(`${pw}: motor kind must be tt or stepper`);
+    if (['camera', 'casepanel', 'casebutton', 'block', 'fan', 'screen'].includes(p.type) && (!p.at || typeof p.at.x !== 'number')) err(`${pw}: ${p.type} needs at: { x, z }`);
     if (p.type === 'block' && !(p.w > 0 && p.d > 0 && p.h > 0)) err(`${pw}: block needs w, d and h`);
     if (p.type === 'camera' && !componentIds.has(p.connector)) err(`${pw}: connector "${p.connector}" is not a board component`);
     const comp = p.type === 'camera' ? null : partComponent(p);
@@ -167,7 +168,7 @@ function checkCircuit(circuit, where) {
 }
 
 // ---------- LESSONS ----------
-const LANGS = new Set(['python', 'bash', 'ini', 'cpp', 'javascript', 'text']);
+const LANGS = new Set(['python', 'bash', 'ini', 'cpp', 'javascript', 'yaml', 'text']);
 const BLOCKS = ['h', 'steps', 'tips', 'note', 'specs', 'cmd'];
 function checkBlocks(blocks, where) {
   if (blocks == null) return;
@@ -271,7 +272,7 @@ for (const l of LESSONS ?? []) {
         for (const id of Object.keys(st.set ?? {})) if (!partIds.has(id)) err(`${where} sequence step ${i + 1}: part "${id}" is not in the circuit`);
         if (st.tone && !s.buzzer) err(`${where} sequence step ${i + 1} has a tone but the sim has no buzzer`);
       }
-      for (const id of [...(s.lamps ?? []), ...Object.keys(s.idle ?? {})]) if (!partIds.has(id)) err(`${where} sequence lamp "${id}" is not in the circuit`);
+      for (const id of [...(s.lamps ?? []), ...Object.keys(s.idle ?? {}), ...Object.keys(s.rest ?? {})]) if (!partIds.has(id)) err(`${where} sequence lamp "${id}" is not in the circuit`);
     }
     if (s.type === 'detect' && !s.objects?.every((o) => o.label && o.box?.length === 4)) err(`${where} detect sim needs objects [{ label, box: [x, y, w, h] }]`);
     if (s.type === 'chat' && (!s.model || !s.chats?.every((c) => c.q && c.a))) err(`${where} chat sim needs model and chats [{ q, a }]`);

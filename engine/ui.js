@@ -9,8 +9,9 @@ const KEYWORDS = {
   bash: 'sudo if then else fi for do done while case esac function export cd echo source',
   javascript: 'async await const let var function return if else for while new import from export true false null',
   cpp: 'void int float double bool char long unsigned const if else for while return true false include define',
+  yaml: 'true false',
 };
-const COMMENT = { python: '#[^\\n]*', bash: '#[^\\n]*', ini: '[#;][^\\n]*', cpp: '//[^\\n]*', javascript: '//[^\\n]*' };
+const COMMENT = { python: '#[^\\n]*', bash: '#[^\\n]*', ini: '[#;][^\\n]*', cpp: '//[^\\n]*', javascript: '//[^\\n]*', yaml: '#[^\\n]*' };
 
 // Returns one highlighted HTML string per source line.
 export function highlightLines(src, lang) {

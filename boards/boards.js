@@ -9,6 +9,7 @@ export const LINKS = {
 // Sections on the hub home page, in order; each board names its section with `group`.
 export const GROUPS = [
   { id: 'boards', title: 'Development boards' },
+  { id: 'projects', title: 'Modules and projects' },
   { id: 'ai', title: 'AI boards' },
   { id: 'builds', title: 'Hands-on builds' },
 ];
@@ -37,6 +38,38 @@ export const BOARDS = [
   {
     id: 'nano-esp32', group: 'boards', name: 'Arduino Nano ESP32', accent: '#00878f', level: 'Beginner', language: 'C++',
     blurb: 'A breadboard-sized Arduino with Wi-Fi: LEDs, buttons, an RGB LED, sound, an I²C sensor and a Wi-Fi weather station.',
+  },
+  {
+    id: 'esp32-c6', group: 'boards', name: 'ESP32-C6-DevKitC-1', accent: '#5b4bd6', level: 'Beginner', language: 'MicroPython',
+    blurb: 'A RISC-V board with Wi-Fi 6 and a Thread/Zigbee radio: flash MicroPython, LEDs, a button, the ADC and a Wi-Fi switch.',
+  },
+  {
+    id: 'stm32-nucleo', group: 'boards', name: 'STM32 Nucleo-F401RE', accent: '#03234b', level: 'Intermediate', language: 'C++',
+    blurb: 'A 32-bit Arm board with Uno-shaped headers and a built-in debugger: blink, buttons, the 12-bit ADC and an I²C sensor.',
+  },
+  {
+    id: 'pi-zero-2w', group: 'boards', name: 'Raspberry Pi Zero 2 W', accent: '#b0124a', level: 'Beginner', language: 'Python',
+    blurb: 'A tiny Linux computer: set it up headless over Wi-Fi, then an LED, a button and a web switch from your phone.',
+  },
+  {
+    id: 'm5stack-cores3', group: 'boards', name: 'M5Stack CoreS3', accent: '#e8641e', level: 'Beginner', language: 'C++',
+    blurb: 'An ESP32-S3 in a finished case: draw on the touch screen, read taps and tilt, and plug in sensors without wiring.',
+  },
+  {
+    id: 'uno-modules', group: 'projects', name: 'Arduino Uno: displays and motors', accent: '#2f8f83', level: 'Beginner', language: 'C++',
+    blurb: 'The modules every kit includes: OLED, LCD1602, WS2812 LEDs, a relay, a DC motor with its driver, a stepper and a joystick.',
+  },
+  {
+    id: 'uno-sensors', group: 'projects', name: 'Arduino Uno: sensors and modules', accent: '#7a5bd0', level: 'Beginner', language: 'C++',
+    blurb: 'Motion, tilt, soil moisture, an IR remote, RFID cards, microSD logging, GPS and a real-time clock.',
+  },
+  {
+    id: 'uno-car', group: 'projects', name: 'Arduino smart car', accent: '#e08a1e', level: 'Intermediate', language: 'C++',
+    blurb: 'Two motors and a driver, obstacle avoidance with an ultrasonic sensor, then driving it from your phone over Bluetooth.',
+  },
+  {
+    id: 'esp32-home', group: 'projects', name: 'ESP32 smart home', accent: '#1f8fd6', level: 'Intermediate', language: 'YAML',
+    blurb: 'ESPHome and Home Assistant: a lamp relay, a motion sensor, temperature, an automation and an OLED desk screen.',
   },
   {
     id: 'xiao-esp32s3-sense', group: 'ai', name: 'XIAO ESP32S3 Sense', accent: '#7cb518', level: 'Beginner', language: 'C++',
@@ -74,6 +107,14 @@ export const BOARDS = [
     id: 'soldering', group: 'builds', name: 'Soldering basics', accent: '#c2951a', level: 'Beginner', language: 'Hands-on',
     blurb: 'Safety, tinning, a good joint, LEDs and header pins, spotting bad joints and fixing them, on a small LED kit.',
   },
+  {
+    id: 'pc-cooling', group: 'builds', name: 'PC cooling: AIO, fans and RGB', accent: '#2aa7c9', level: 'Beginner', language: 'Hands-on',
+    blurb: 'How a liquid cooler works and how to fit it, fan headers and fan curves, and 12 V RGB versus 5 V ARGB.',
+  },
+  {
+    id: 'pi-nvme', group: 'builds', name: 'Raspberry Pi 5: cooler and NVMe SSD', accent: '#c2185b', level: 'Beginner', language: 'Hands-on',
+    blurb: 'Fit the Active Cooler and an M.2 HAT+ with an NVMe drive, switch on PCIe Gen 3 and boot from the SSD.',
+  },
 ];
 
 // Boards planned next, shown under their own heading only when the list is not empty.
@@ -106,6 +147,17 @@ export const HUB_ZH = {
   'Build a desk gadget in every lesson: traffic light, night light, door chime, ruler, dial gauge and a parking sensor.': '每节课做一个桌面小装置：红绿灯、小夜灯、门铃、测距尺、指针表和倒车雷达。',
   'A full Linux computer with GPIO pins: Python, cameras, web servers and a weather station.': '带 GPIO 引脚的完整 Linux 电脑：Python、摄像头、网页服务器和气象站。',
   'A Wi-Fi microcontroller: flash MicroPython, read sensors and control things from your phone.': '带 Wi-Fi 的微控制器：烧录 MicroPython、读取传感器，用手机控制设备。',
+  'Modules and projects': '模块与项目', YAML: 'YAML',
+  'ESP32-C6-DevKitC-1': 'ESP32-C6-DevKitC-1', 'A RISC-V board with Wi-Fi 6 and a Thread/Zigbee radio: flash MicroPython, LEDs, a button, the ADC and a Wi-Fi switch.': '带 Wi-Fi 6 和 Thread/Zigbee 射频的 RISC-V 开发板：烧录 MicroPython，玩 LED、按键、ADC 和 Wi-Fi 开关。',
+  'STM32 Nucleo-F401RE': 'STM32 Nucleo-F401RE', 'A 32-bit Arm board with Uno-shaped headers and a built-in debugger: blink, buttons, the 12-bit ADC and an I²C sensor.': '排母布局和 Uno 一样、自带调试器的 32 位 Arm 开发板：闪灯、按键、12 位 ADC 和 I²C 传感器。',
+  'Raspberry Pi Zero 2 W': '树莓派 Zero 2 W', 'A tiny Linux computer: set it up headless over Wi-Fi, then an LED, a button and a web switch from your phone.': '迷你 Linux 电脑：通过 Wi-Fi 无屏幕设置，然后玩 LED、按键，再用手机网页开关。',
+  'M5Stack CoreS3': 'M5Stack CoreS3', 'An ESP32-S3 in a finished case: draw on the touch screen, read taps and tilt, and plug in sensors without wiring.': '装在成品外壳里的 ESP32-S3：在触摸屏上画画，读取点击和倾斜，不用接线就能插传感器。',
+  'Arduino Uno: displays and motors': 'Arduino Uno：屏幕与电机', 'The modules every kit includes: OLED, LCD1602, WS2812 LEDs, a relay, a DC motor with its driver, a stepper and a joystick.': '每个套件里都有的模块：OLED、LCD1602、WS2812 灯珠、继电器、直流电机及驱动、步进电机和摇杆。',
+  'Arduino Uno: sensors and modules': 'Arduino Uno：传感器与模块', 'Motion, tilt, soil moisture, an IR remote, RFID cards, microSD logging, GPS and a real-time clock.': '人体感应、倾斜、土壤湿度、红外遥控、RFID 卡、microSD 记录、GPS 和实时时钟。',
+  'Arduino smart car': 'Arduino 智能小车', 'Two motors and a driver, obstacle avoidance with an ultrasonic sensor, then driving it from your phone over Bluetooth.': '两个电机加一块驱动板，用超声波传感器避障，再用手机通过蓝牙驾驶。',
+  'ESP32 smart home': 'ESP32 智能家居', 'ESPHome and Home Assistant: a lamp relay, a motion sensor, temperature, an automation and an OLED desk screen.': 'ESPHome 与 Home Assistant：继电器控灯、人体传感器、温度、自动化和 OLED 桌面屏。',
+  'PC cooling: AIO, fans and RGB': '电脑散热：水冷、风扇与 RGB', 'How a liquid cooler works and how to fit it, fan headers and fan curves, and 12 V RGB versus 5 V ARGB.': '水冷的原理和安装、风扇插座与风扇曲线，以及 12 V RGB 和 5 V ARGB 的区别。',
+  'Raspberry Pi 5: cooler and NVMe SSD': '树莓派 5：散热器与 NVMe 固态硬盘', 'Fit the Active Cooler and an M.2 HAT+ with an NVMe drive, switch on PCIe Gen 3 and boot from the SSD.': '装上主动散热器和带 NVMe 硬盘的 M.2 HAT+，开启 PCIe Gen 3，从固态硬盘启动。',
   'PC build: motherboard': '装机：主板', 'Hands-on': '动手装配',
   'Install the CPU, memory, SSD and cooler, wire the tricky front-panel pins, then take it all apart again.': '安装 CPU、内存、固态硬盘和散热器，接好最容易出错的前面板针脚，再把它们全部拆下来。',
  

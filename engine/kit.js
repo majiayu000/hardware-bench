@@ -3,6 +3,7 @@
 // Receives THREE from board3d.js so the pure geometry module stays three.js-free.
 import { BREADBOARD, LED_COLORS, resistorBands } from './board-geometry.js';
 import { PC_KINDS, PC_PARTS } from './kit-pc.js';
+import { modulePresets, motorPart, screenPart } from './kit-modules.js';
 
 
 // Style: toon shading with two light bands plus thick ink outlines drawn by three's OutlineEffect
@@ -285,15 +286,32 @@ export function createModelKit(THREE, { RoundedBoxGeometry } = {}) {
       const t = preset.thickness ?? 1.6;
       const face = spec.face ?? 1;
       const bottom = mid.y + 3;
+      const gold = toon('#e2bd5b');
+      const group = new THREE.Group();
+      // A flat preset lies on its pins across the centre channel (two rows); the others stand on one row.
+      if (preset.flat) {
+        const d = span(holes, 'z') + 5;
+        const pcb = shape(Box(w, t, d), spec.color ?? preset.color, ink);
+        pcb.position.set(mid.x, bottom + t / 2, mid.z);
+        group.add(pcb, ...holes.map((p) => rod(p, V(p.x, bottom, p.z), 0.32, gold)));
+        const pickables = [pcb];
+        const live = preset.decorate?.({ group, ink, pickables, mid, bottom, w, d, t, spec }) ?? {};
+        if (spec.label) {
+          const plate = new THREE.Mesh(new THREE.PlaneGeometry(16, 4), flat(new THREE.MeshBasicMaterial({ map: textTexture(spec.label, preset.labelColor), transparent: true })));
+          plate.rotation.x = -Math.PI / 2;
+          plate.position.set(mid.x, bottom + t + 0.05, mid.z + d * 0.3);
+          group.add(plate);
+        }
+        tag(pickables, spec.id);
+        return { group, ink, pickables, anchor: V(mid.x, bottom + 12, mid.z), setState: live.setState ?? (() => {}), tick: live.tick };
+      }
       const pcb = shape(Box(w, h, t), spec.color ?? preset.color, ink);
       pcb.position.set(mid.x, bottom + h / 2, mid.z);
       const header = shape(Box(pinSpan + 2.5, 2.5, 2.5), '#1d1c20', ink);
       header.position.set(mid.x, mid.y + 1.25, mid.z);
-      const gold = toon('#e2bd5b');
-      const group = new THREE.Group();
       group.add(pcb, header, ...holes.map((p) => rod(p, V(p.x, bottom + 1.5, p.z), 0.32, gold)));
       const pickables = [pcb, header];
-      preset.decorate?.({ group, ink, pickables, mid, bottom, h, t, face });
+      const live = preset.decorate?.({ group, ink, pickables, mid, bottom, h, t, face, spec }) ?? {};
       if (spec.label) {
         const size = Math.min(w * 0.8, 16);
         const plate = new THREE.Mesh(new THREE.PlaneGeometry(size, size / 4), flat(new THREE.MeshBasicMaterial({ map: textTexture(spec.label, preset.labelColor), transparent: true })));
@@ -302,7 +320,9 @@ export function createModelKit(THREE, { RoundedBoxGeometry } = {}) {
         group.add(plate);
       }
       tag(pickables, spec.id);
-      return { group, ink, pickables, anchor: V(mid.x, bottom + h + 2, mid.z), setState() {} };
+      const part = { group, ink, pickables, anchor: V(mid.x, bottom + h + 2, mid.z), setState: live.setState ?? (() => {}), tick: live.tick };
+      if (spec.state) part.setState(spec.state);
+      return part;
     },
 
     // Camera module on the table, joined to a board connector by a ribbon cable.
@@ -506,6 +526,9 @@ export function createModelKit(THREE, { RoundedBoxGeometry } = {}) {
 
   const api = { THREE, INK, toon, flat, Box, inkMaterial, shape, rod, textTexture, breadboard, wire, parts: PARTS };
   for (const [name, build] of Object.entries(PC_PARTS)) PARTS[name] = (spec, ctx) => build(spec, ctx, api);
+  Object.assign(PRESETS, modulePresets(api));
+  PARTS.motor = (spec, ctx) => motorPart(spec, ctx, api);
+  PARTS.screen = (spec, ctx) => screenPart(spec, ctx, api);
   return api;
 }
 

@@ -15,7 +15,7 @@ export const PIN_TYPES = {
 };
 
 // The official 40-pin header, physical pin order: "NAME/ALT type".
-const PI_PINS = ('3V3 power3|5V power5|GPIO2/SDA i2c|5V power5|GPIO3/SCL i2c|GND gnd|GPIO4 gpio|GPIO14/TXD uart|GND gnd|GPIO15/RXD uart|'
+export const PI_PINS = ('3V3 power3|5V power5|GPIO2/SDA i2c|5V power5|GPIO3/SCL i2c|GND gnd|GPIO4 gpio|GPIO14/TXD uart|GND gnd|GPIO15/RXD uart|'
   + 'GPIO17 gpio|GPIO18/PWM0 gpio|GPIO27 gpio|GND gnd|GPIO22 gpio|GPIO23 gpio|3V3 power3|GPIO24 gpio|GPIO10/MOSI spi|GND gnd|'
   + 'GPIO9/MISO spi|GPIO25 gpio|GPIO11/SCLK spi|GPIO8/CE0 spi|GND gnd|GPIO7/CE1 spi|GPIO0/ID_SD id|GPIO1/ID_SC id|GPIO5 gpio|GND gnd|'
   + 'GPIO6 gpio|GPIO12/PWM0 gpio|GPIO13/PWM1 gpio|GND gnd|GPIO19/PWM1 gpio|GPIO16 gpio|GPIO26 gpio|GPIO20 gpio|GND gnd|GPIO21 gpio')

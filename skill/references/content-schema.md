@@ -46,6 +46,8 @@ export const BOARD = {
   name: 'ESP32-DevKitC V4',
   width: 48.26, depth: 27.94, thickness: 1.6, cornerRadius: 1,
   pcbColor: '#1b1b1b',                         // PCB colour; the board stands on brass standoffs at its `holes`
+  silkColor: 'rgba(3,35,75,0.8)',              // optional: silkscreen ink for light-coloured boards
+  traces: false,                                // optional: no faint copper traces (a cased device, not a bare PCB)
   heightScale: 1.4,                             // optional: exaggerate component heights for legibility
   holes: [{ x: 2.5, z: 2.5, r: 1.3 }],                       // optional mounting holes
   silkscreen: [{ text: 'ESP32-DevKitC', x: 6, z: 14, size: 1.6, rotate: 0, align: 'left' }],  // optional
@@ -127,7 +129,7 @@ Tabs appear automatically:
 - **Try it:** if it has `sim`.
 - **Kit:** if it has `kit`.
 
-`lang` is `python`, `bash`, `cpp`, `javascript`, `ini` or `text`.
+`lang` is `python`, `bash`, `cpp`, `javascript`, `ini`, `yaml` or `text`.
 
 ### circuit
 
@@ -159,11 +161,14 @@ circuit: {
 | `button` | `legs` ×4, usually straddling the centre channel | `{ pressed }`; the user can press and hold it in the scene |
 | `rgbled` | `legs` ×4 (R, common, G, B) | `{ rgb: [r, g, b] }` |
 | `pot` | `legs` ×3, `value` 0–1 | `{ value }` |
-| `module` | `pins` (one row), `preset`: `breakout` / `hcsr04` / `dht22`, `label`, `color`, `face` (±1) | none |
+| `module` | `pins` (one row; two rows for `driver`, which lies flat across the centre channel), `preset`, `label`, `color`, `face` (±1), `state` (initial 3D state) | depends on the preset (below) |
 | `camera` | `at: { x, z }` (board coordinates, on the table), `connector`: a component id | none |
 | `buzzer` | `legs` ×2 (+, −) | `{ on }` shows sound rings |
 | `ldr` | `legs` ×2; `controls: { value: [0, 1] }`, `controlLabel` | none |
 | `servo` | `at: { x, z }` on the table, `legs` ×3 (signal, +, −) where its lead plugs in; `controls: { angle: [0, 180] }` | `{ angle }` |
+| `motor` | `at: { x, z }` on the table; `kind: 'tt'` (gear motor with a wheel, `legs` ×2, `flip` puts the wheel on the +z side) or `'stepper'` (28BYJ-48, `plug: { hole, up }` where its cable ends on the driver board); `facing: 'x' \| 'z'` | `{ spin }` −1…1 |
+
+**Module presets** (`preset`): `breakout` (generic, default), `hcsr04` (`{ distance }` control), `dht22`, `oled` (`{ lines }`), `lcd1602` (`{ lines: [line1, line2] }`), `ws2812` (8 LEDs, `{ pixels: [[r, g, b] 0–1, …] }`), `relay` (`{ on }`), `driver` (TB6612FNG, flat), `uln2003` (`{ phase }` 0–3 lights one coil LED), `pir` (`{ on }`), `mpu6050`, `soil`, `irrx`, `rc522`, `joystick` (`{ x, y }` −1…1), `sdcard`, `gps` (`{ fix }`), `ds3231`. Pin order is the module's own; name it in `desc`.
 
 **PC build parts** (no breadboard: leave `breadboard` out of the circuit). Each sits on a component or header pins of the board. Every one also takes the generic states `{ shown, lift }` (lift 0 = seated, 1 = held above along its insert direction), which the `assembly` sim drives.
 
@@ -180,7 +185,8 @@ circuit: {
 | `casepanel` | `at: { x, z }` on the table; `w`, `color`, `label` | `{ power, hdd }` LEDs |
 | `casebutton` | `at`, `y` (height on the panel), `size`, `color`, `label` | `{ pressed }`; pressable in the scene |
 | `block` | Any part without its own model, built from rounded boxes: `at: { x, z }`, `w`, `d`, `h`, `y` (base above the board top; `table: true` measures from the table), `color`, `text`, `opacity` (glass), `round`, `boxes: [{ x, z, y, w, d, h, color, text }]` placed relative to it (`y` above its top), `insert: [dx, dy, dz]` | none (`shown` / `lift` only) |
-| `fan` | A case fan: `at`, `y`, `table`, `size` (mm), `facing: 'up' \| 'x' \| '-x' \| 'z' \| '-z'`, `color`, `accent` | `{ spin }` 0–1 |
+| `fan` | A case fan: `at`, `y`, `table`, `size` (mm), `facing: 'up' \| 'x' \| '-x' \| 'z' \| '-z'`, `color`, `accent`, `rgb: true` (LED ring) | `{ spin }` 0–1, `{ color }` (CSS colour or null) on an RGB fan |
+| `screen` | A display lying flat on the board or device: `at: { x, z }`, `w`, `d`, `y` (above the board top, clear of the component under it), `lines`, `bg`, `fg` | `{ lines }` |
 
 Keep the case panel off the line between the camera and the headers it is wired to (beside the board, not in front of it), or it hides the plugs.
 
@@ -266,7 +272,7 @@ Every string a sim prints can be overridden in its config, so no board's wording
 | `matrix` | `frames: [{ rows: ['0070…'] (one string per row, digits 0–7), ms, log, trace }]`, `color`, `caption` | plays the frames on a dot-matrix panel (LED matrices, the micro:bit display). Each frame's `trace` is a code-trace label |
 | `detect` | `objects: [{ label, box: [x, y, w, h] (0–1 of the frame), score, color, fill }]`, `fps`, `start`, `caption` | a camera frame with labelled boxes that jitter like a live detector; logs `label score` |
 | `chat` | `model`, `chats: [{ q, a }]`, `path`, `start`, `caption` | a chat window: Run starts the “server”, each question streams its example answer word by word. Trace labels `serve`, `ask`, `reply` |
-| `sequence` | `lamps` (LED ids shown in the panel), `steps: [{ set: { ledId: true \| false }, tone, ms, log, trace }]`, optional `buzzer`, `button`, `idle` | timed light and tone patterns (traffic lights, chimes). Without `button` it loops; with one, Run waits in `idle` and each press plays the steps once. `log` is what the sketch prints; each step's `trace` is a code-trace label |
+| `sequence` | `lamps` (LED ids shown in the panel), `steps: [{ set: { ledId: true \| false, partId: { …state } }, tone, ms, log, trace }]`, optional `buzzer`, `button`, `idle`, `rest` (states applied on Stop) | timed light and tone patterns (traffic lights, chimes). Without `button` it loops; with one, Run waits in `idle` and each press plays the steps once. `log` is what the sketch prints; each step's `trace` is a code-trace label |
 | `assembly` | `steps: [{ do: 'insert' \| 'remove' \| 'set', parts: [ids], text, zoom, pins, from, to, seconds }]`, `mode: 'assemble' \| 'disassemble'`, `done` | a step-by-step "video" player (play, pause, step, scrub). `insert` lowers parts into place, `remove` lifts them out, `set` tweens state such as `{ open }` from `from` to `to`. `zoom` is the part the camera moves to; `pins` are highlighted. In `assemble` mode the scene outside Try it shows the finished build |
 | `boot` | `power`, `reset` (casebutton ids), `panel`, `fans`, `powerPins`, `resetPins`, `post` (log lines) | power and reset buttons, in the panel or in 3D: fans spin, LEDs light, POST lines print; holding power 4 s forces it off |
 

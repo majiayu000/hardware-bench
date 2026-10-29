@@ -142,7 +142,8 @@ export function createBoardScene(container, board, { accent = '#c51a4a', onHover
     g.strokeStyle = 'rgba(255,255,255,0.08)';
     g.lineWidth = 0.35 * px;
     const dirs = [[1, 0], [0, 1], [0.707, 0.707], [-0.707, 0.707]];
-    for (let i = 0; i < 70; i += 1) {
+    // `traces: false` for things that are not bare circuit boards (a cased device).
+    for (let i = 0; i < (board.traces === false ? 0 : 70); i += 1) {
       let x = rand() * board.width;
       let z = rand() * board.depth;
       g.beginPath();
@@ -156,14 +157,15 @@ export function createBoardScene(container, board, { accent = '#c51a4a', onHover
       }
       g.stroke();
     }
-    g.strokeStyle = 'rgba(255,255,255,0.55)';
+    // Silkscreen ink: white by default, `board.silkColor` for light boards.
+    g.strokeStyle = board.silkColor ?? 'rgba(255,255,255,0.55)';
     g.lineWidth = 0.18 * px;
     for (const comp of board.components ?? []) {
       if (comp.under) continue;
       const d = comp.d ?? comp.w;
       g.strokeRect((comp.x - comp.w / 2 - 0.6) * px, (comp.z - d / 2 - 0.6) * px, (comp.w + 1.2) * px, (d + 1.2) * px);
     }
-    g.fillStyle = 'rgba(255,255,255,0.78)';
+    g.fillStyle = board.silkColor ?? 'rgba(255,255,255,0.78)';
     g.textBaseline = 'middle';
     for (const s of board.silkscreen ?? []) {
       g.save();

@@ -276,7 +276,8 @@ function setBubble(id, text) {
     $(`#bubbles [data-id="${CSS.escape(id)}"]`)?.remove();
     return;
   }
-  if (!(id in overlay.bubbles)) $('#bubbles').insertAdjacentHTML('beforeend', `<span class="bubble" data-id="${escape(id)}"></span>`);
+  // Bubbles show readings and requests; sims translate any words in them with ctx.t().
+  if (!(id in overlay.bubbles)) $('#bubbles').insertAdjacentHTML('beforeend', `<span class="bubble" data-id="${escape(id)}" data-no-i18n></span>`);
   overlay.bubbles[id] = text;
 }
 

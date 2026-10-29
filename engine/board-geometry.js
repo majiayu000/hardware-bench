@@ -82,12 +82,13 @@ export function resistorBands(ohms) {
 }
 
 export const PART_TYPES = ['led', 'resistor', 'button', 'rgbled', 'pot', 'module', 'camera', 'buzzer', 'servo', 'ldr',
-  'socketlid', 'cpu', 'cooler', 'dimm', 'm2', 'gpu', 'plug', 'powerplug', 'casepanel', 'casebutton', 'block', 'fan'];
+  'socketlid', 'cpu', 'cooler', 'dimm', 'm2', 'gpu', 'plug', 'powerplug', 'casepanel', 'casebutton', 'block', 'fan', 'motor', 'screen'];
 // Parts whose legs go into breadboard holes (the rest sit on the board, in slots or on the table).
-export const BREADBOARD_PARTS = ['led', 'resistor', 'button', 'rgbled', 'pot', 'module', 'buzzer', 'ldr', 'servo'];
+export const BREADBOARD_PARTS = ['led', 'resistor', 'button', 'rgbled', 'pot', 'module', 'buzzer', 'ldr', 'servo', 'motor'];
 // Which board component a slotted part refers to.
 export const partComponent = (part) => part.socket ?? part.slot ?? part.connector ?? null;
-export const MODULE_PRESETS = ['breakout', 'hcsr04', 'dht22'];
+export const MODULE_PRESETS = ['breakout', 'hcsr04', 'dht22', 'oled', 'lcd1602', 'ws2812', 'relay', 'driver', 'uln2003',
+  'pir', 'mpu6050', 'soil', 'irrx', 'rc522', 'joystick', 'sdcard', 'gps', 'ds3231'];
 
 // Holes used when a part is drawn on its own (lesson thumbnails).
 export const ICON_HOLES = {
@@ -100,6 +101,7 @@ export const ICON_HOLES = {
   camera: { at: { x: 0, z: 0 } },
   buzzer: { legs: ['a13', 'a16'] },
   servo: { at: { x: 40, z: -30 }, legs: ['a10', 'a11', 'a12'] },
+  motor: { at: { x: 40, z: -30 }, legs: ['a10', 'a11'] },
   ldr: { legs: ['a14', 'a16'] },
 };
 
@@ -156,7 +158,7 @@ export function boardSvg(board, circuit) {
     const cx = pts.reduce((s, p) => s + p.x, 0) / pts.length;
     const cz = pts.reduce((s, p) => s + p.z, 0) / pts.length;
     anchors[`part:${part.id}`] = { x: cx, z: cz };
-    const fill = { led: LED_COLORS[part.color ?? 'red'], resistor: '#d9c7a0', button: '#2b2a2e', rgbled: '#f4f1ea', pot: '#2f5fb5', camera: '#2d7a4b', buzzer: '#24232b', servo: '#2f6fd0', ldr: '#d8743c' }[part.type] ?? part.color ?? '#5b2a86';
+    const fill = { led: LED_COLORS[part.color ?? 'red'], resistor: '#d9c7a0', button: '#2b2a2e', rgbled: '#f4f1ea', pot: '#2f5fb5', camera: '#2d7a4b', buzzer: '#24232b', servo: '#2f6fd0', ldr: '#d8743c', motor: '#f2c12e' }[part.type] ?? part.color ?? '#5b2a86';
     const body = part.type === 'led' || part.type === 'rgbled'
       ? `<circle cx="${cx}" cy="${cz}" r="2.6" fill="${fill}" stroke="#24222c" stroke-width=".3" data-part="${esc(part.id)}"/>`
       : `<rect x="${cx - Math.max(3, (Math.max(...pts.map((p) => p.x)) - Math.min(...pts.map((p) => p.x))) / 2 + 1.5)}" y="${cz - 2}" width="${Math.max(6, Math.max(...pts.map((p) => p.x)) - Math.min(...pts.map((p) => p.x)) + 3)}" height="4" rx="1" fill="${fill}" stroke="#24222c" stroke-width=".3" data-part="${esc(part.id)}"/>`;

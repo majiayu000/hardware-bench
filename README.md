@@ -15,6 +15,15 @@ Free, interactive electronics courses for real boards, in English and 简体中�
 | Raspberry Pi Pico 2 W: MicroPython Starter | 10 | MicroPython |
 | BBC micro:bit V2: Code Your First Gadgets | 10 | MicroPython |
 | Arduino Nano ESP32: Small Board, Big Projects | 10 | C++ |
+| ESP32-C6: Wi-Fi 6 in MicroPython | 6 | MicroPython |
+| STM32 Nucleo-F401RE: Arduino Meets Arm | 6 | C++ |
+| Raspberry Pi Zero 2 W: A Tiny Linux Computer | 5 | Python |
+| M5Stack CoreS3: A Gadget in a Box | 6 | C++ |
+| **Modules and projects** | | |
+| Arduino Uno: Displays and Motors | 8 | C++ |
+| Arduino Uno: Sensors and Modules | 8 | C++ |
+| Arduino Uno: Build a Smart Car | 4 | C++ |
+| ESP32 Smart Home with ESPHome | 6 | YAML |
 | **AI boards** | | |
 | XIAO ESP32S3 Sense: Eyes and Ears | 10 | C++ |
 | Arduino UNO Q: Two Brains | 10 | C++ + Python |
@@ -26,6 +35,8 @@ Free, interactive electronics courses for real boards, in English and 简体中�
 | PC Upgrade: Graphics Card and SSD | 8 | hands-on |
 | Mechanical Keyboard: Build Your Own | 8 | hands-on |
 | Soldering Basics: Your First Kit | 9 | hands-on |
+| PC Cooling: Liquid Cooler, Fans and RGB | 4 | hands-on |
+| Raspberry Pi 5: Cooling and NVMe SSD | 4 | Shell |
 
 No account, no tracking, no build step: progress stays in your browser, and the site loads nothing from other servers.
 
@@ -44,7 +55,7 @@ Then open http://localhost:5180.
 ## How it is built
 
 ```
-index.html, hub.js       home page: board cards, progress, AI boards coming next
+index.html, hub.js       home page: board cards by section, progress
 engine/                  shared engine: app, 3D scene (three.js), part kit, sims, i18n, guide, styles
 engine/vendor/three/     three.js r160, vendored
 engine/fonts/            self-hosted fonts
@@ -77,4 +88,4 @@ The validator checks pins, breadboard holes, wires, labels, code-trace line numb
 ## Credits
 
 - Design inspired by [learn-arduino](https://learn-arduino-red.vercel.app/) by [@DilumSanjaya](https://x.com/DilumSanjaya).
-- Facts come from the vendors' own documentation: Arduino, Raspberry Pi, Espressif, Seeed Studio, the micro:bit Foundation, NVIDIA, Hailo and Intel. Each `content.js` says which sources it follows.
+- Facts come from the vendors' own documentation: Arduino, Raspberry Pi, Espressif, STMicroelectronics, M5Stack, Seeed Studio, the micro:bit Foundation, NVIDIA, Hailo, Intel, ESPHome and the module and library makers. Each `content.js` says which sources it follows.

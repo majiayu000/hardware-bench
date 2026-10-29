@@ -139,7 +139,7 @@ const SIMS = {
       led.classList.toggle('lit', v);
       state.textContent = v ? 'HIGH · on' : 'LOW · off';
       ctx.part(config.led, { on: v, level: 0.8 });
-      ctx.bubble(config.button, v ? 'pressed' : 'released');
+      ctx.bubble(config.button, ctx.t(v ? 'pressed' : 'released'));
       ctx.trace(v ? 'pressed' : 'released');
       ctx.log(v ? 'Pressed!' : 'Released');
     };
@@ -149,7 +149,7 @@ const SIMS = {
     btn.addEventListener('keydown', (ev) => { if (ev.key === ' ' || ev.key === 'Enter') { ev.preventDefault(); press(true); } });
     btn.addEventListener('keyup', (ev) => { if (ev.key === ' ' || ev.key === 'Enter') press(false); });
     return {
-      start() { ctx.trace('wait'); ctx.bubble(config.button, 'released'); },
+      start() { ctx.trace('wait'); ctx.bubble(config.button, ctx.t('released')); },
       stop() { press(false); led.classList.remove('lit'); state.textContent = 'LOW · off'; ctx.part(config.led, { on: false }); ctx.bubble(config.button, null); ctx.trace(null); },
       input(id, pressed) { if (id !== config.button) return false; press(pressed); return true; },
       destroy() { ctx.part(config.led, { on: false }); ctx.part(config.button, { pressed: false }); },
@@ -393,7 +393,7 @@ const SIMS = {
   web(el, ctx) {
     const { config } = ctx;
     el.innerHTML = `<div class="sim"><div class="sim-row" style="align-items:flex-start">
-      <div class="browser" style="flex:1;min-width:220px"><div class="browser-bar"><i></i><i></i><i></i><span>${ctx.escape(config.url)}</span></div><div class="browser-body"></div></div>
+      <div class="browser" style="flex:1;min-width:220px"><div class="browser-bar"><i></i><i></i><i></i><span data-no-i18n>${ctx.escape(config.url)}</span></div><div class="browser-body"></div></div>
       ${ledMarkup(ctx.escape(config.label ?? 'LED'))}
       </div><p class="sim-caption">This is the page your phone sees. Each click sends an HTTP request to the board.</p></div>`;
     const body = el.querySelector('.browser-body');
@@ -434,7 +434,7 @@ const SIMS = {
     const units = { temperature: '°C', humidity: '%', pressure: 'hPa' };
     const history = [];
     let temp = 22.6;
-    el.innerHTML = `<div class="sim"><div class="browser"><div class="browser-bar"><i></i><i></i><i></i><span>${ctx.escape(config.url)}</span></div><div class="browser-body"></div></div><p class="sim-caption">The page asks the board for a new reading every ${every} seconds.</p></div>`;
+    el.innerHTML = `<div class="sim"><div class="browser"><div class="browser-bar"><i></i><i></i><i></i><span data-no-i18n>${ctx.escape(config.url)}</span></div><div class="browser-body"></div></div><p class="sim-caption">The page asks the board for a new reading every ${every} seconds.</p></div>`;
     const body = el.querySelector('.browser-body');
     function render(r) {
       if (!ctx.isRunning() || !r) {
@@ -606,6 +606,8 @@ const SIMS = {
   // LEDs (and an optional buzzer) stepping through timed states, like a traffic light.
   // config: lamps [led ids], steps [{ set: { ledId: on }, tone (Hz), ms, log, trace }], buzzer (id),
   //         button (id): Run then waits in `idle` until the button is pressed and plays the steps once.
+  //         A `set` value that is an object is passed to the part as its state (a screen's
+  //         { lines }, a motor's { spin }, a relay's { on }…); `rest` is applied when the sequence stops.
   sequence(el, ctx) {
     const { config, escape } = ctx;
     const t = timers();
@@ -631,6 +633,7 @@ const SIMS = {
     const quiet = () => { osc?.stop(); osc = null; if (config.buzzer) { ctx.part(config.buzzer, { on: false }); ctx.bubble(config.buzzer, null); } };
     function apply(set = {}) {
       for (const [id, on] of Object.entries(set)) {
+        if (typeof on === 'object') { ctx.part(id, on); continue; }
         ctx.part(id, { on, level: 0.9, color: ctx.param(id, 'color') });
         el.querySelector(`.led[data-id="${CSS.escape(id)}"]`)?.classList.toggle('lit', on);
       }
@@ -681,7 +684,7 @@ const SIMS = {
       push.addEventListener('pointerdown', (ev) => { ev.preventDefault(); push.setPointerCapture(ev.pointerId); press(true); });
       push.addEventListener('pointerup', () => press(false));
     }
-    const off = () => { t.clear(); quiet(); apply(Object.fromEntries(lamps.map((id) => [id, false]))); };
+    const off = () => { t.clear(); quiet(); apply(Object.fromEntries(lamps.map((id) => [id, false]))); apply(config.rest); };
     return {
       start() { off(); if (config.button) idle(); else play(0); },
       stop() { off(); busy = false; ctx.trace(null); stateEl.textContent = ctx.t('Stopped'); },

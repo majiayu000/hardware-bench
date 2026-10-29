@@ -405,7 +405,8 @@ export const PC_PARTS = {
   },
 
   // A case fan. `at`, `y`, `table` as for block; `size` (mm, default 120); `facing`: 'up' (lying
-  // flat), 'x', '-x', 'z' or '-z' (standing, blowing that way). State: { spin } 0–1.
+  // flat), 'x', '-x', 'z' or '-z' (standing, blowing that way); `rgb`: true adds an LED ring.
+  // State: { spin } 0–1, { color } (CSS colour, or null for off) for an RGB fan.
   fan(spec, ctx, k) {
     const { THREE } = k;
     const ink = k.inkMaterial();
@@ -416,6 +417,9 @@ export const PC_PARTS = {
     const frame = k.shape(k.Box(s, s, 25, s * 0.05), spec.color ?? '#2b2a33', ink);
     const ring = new THREE.Mesh(new THREE.CircleGeometry(s * 0.46, 48), k.flat(k.toon('#14131a')));
     ring.position.z = 12.6;
+    const back = ring.clone();
+    back.position.z = -12.6;
+    back.rotation.y = Math.PI;
     const rotor = new THREE.Group();
     rotor.position.z = 12.9;
     const hub = k.shape(new THREE.CylinderGeometry(s * 0.14, s * 0.14, 2, 32), spec.accent ?? '#3a6dd0', ink);
@@ -427,7 +431,15 @@ export const PC_PARTS = {
       blade.rotation.z = -(i / 7) * Math.PI * 2 + 0.35;
       rotor.add(blade);
     }
-    fan.add(frame, ring, rotor);
+    fan.add(frame, ring, back, rotor);
+    const glowMat = k.toon('#4a4a52', { emissive: '#000000' });
+    if (spec.rgb) {
+      for (const z of [12.8, -12.8]) {
+        const leds = new THREE.Mesh(new THREE.TorusGeometry(s * 0.465, 1.6, 8, 48), k.flat(glowMat));
+        leds.position.z = z;
+        fan.add(leds);
+      }
+    }
     const facing = spec.facing ?? 'up';
     const [rx, ry] = { up: [-Math.PI / 2, 0], z: [0, 0], '-z': [0, Math.PI], x: [0, Math.PI / 2], '-x': [0, -Math.PI / 2] }[facing];
     fan.rotation.set(rx, ry, 0, 'YXZ');
@@ -439,7 +451,10 @@ export const PC_PARTS = {
     let target = spec.spin ?? 0;
     return {
       group, ink, pickables: [frame], anchor: new THREE.Vector3(at.x, base + (facing === 'up' ? 27 : s + 2), at.z), insert: spec.insert ?? [0, 60, 0],
-      setState({ spin } = {}) { if (spin != null) target = spin; },
+      setState({ spin, color } = {}) {
+        if (spin != null) target = spin;
+        if (color !== undefined) { glowMat.color.set(color ?? '#4a4a52'); glowMat.emissive.set(color ?? '#000000').multiplyScalar(color ? 0.9 : 0); }
+      },
       tick(dt) { rpm += (target - rpm) * Math.min(1, dt * 1.5); rotor.rotation.z -= rpm * dt * 14; },
     };
   },
