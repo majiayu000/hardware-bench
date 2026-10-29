@@ -44,6 +44,9 @@ export const BOARDS = [
   },  {
     id: 'nano-esp32', name: 'Arduino Nano ESP32', accent: '#00878f', level: 'Beginner', language: 'C++',
     blurb: 'A breadboard-sized Arduino with Wi-Fi: LEDs, buttons, an RGB LED, sound, an I²C sensor and a Wi-Fi weather station.',
+  },  {
+    id: 'pc-upgrade', name: 'PC upgrade: graphics card and SSD', accent: '#d0563a', level: 'Beginner', language: 'Hands-on',
+    blurb: 'Swap a graphics card, add an M.2 NVMe SSD and a SATA SSD, then check everything works.',
   },
 ];
 
@@ -66,6 +69,7 @@ export const HUB_ZH = {
   'Early release: every pin and command is checked against official documentation, but not every lesson has been run on a real board yet.': '早期版本：每个引脚和命令都对照官方文档核对过，但还不是每节课都在真实板子上跑过。',
   'Found a mistake? Tell us': '发现错误？告诉我们', 'Report a mistake': '报告错误', 'Source code': '源代码',
   'XIAO ESP32S3 Sense': 'XIAO ESP32S3 Sense',
+  'PC upgrade: graphics card and SSD': '电脑升级：显卡和固态硬盘', 'Swap a graphics card, add an M.2 NVMe SSD and a SATA SSD, then check everything works.': '换一块显卡，加一块 M.2 NVMe 和一块 SATA 固态硬盘，再检查一切正常。',
   'A breadboard-sized Arduino with Wi-Fi: LEDs, buttons, an RGB LED, sound, an I²C sensor and a Wi-Fi weather station.': '插得进面包板、带 Wi-Fi 的 Arduino：LED、按钮、RGB LED、声音、I²C 传感器，最后做一个 Wi-Fi 气象站。',
   'Everything is built in: scroll text, make faces with the buttons, roll a dice by shaking, play music and send radio messages.': '所有东西都是内置的：滚动文字、用按钮变表情、摇一摇掷骰子、播放音乐，还能发无线消息。',
   'Fit a 40 TOPS Hailo-10H accelerator, detect objects live from the camera and chat with a language model running on the Pi.': '装上 40 TOPS 的 Hailo-10H 加速器，用摄像头实时检测物体，再和跑在树莓派上的语言模型对话。',
