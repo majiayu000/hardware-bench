@@ -35,6 +35,7 @@ async function renderBoards() {
 }
 
 function renderComing() {
+  $('#comingTitle').hidden = $('#coming').hidden = COMING.length === 0;
   $('#coming').innerHTML = COMING.map((c) => `<div class="hub-card soon">
     <div class="hub-card-body">
       <div class="hub-meta"><span class="chip-tag">${esc(c.level)}</span><span class="chip-tag mono">${esc(c.tag)}</span><span class="hub-count">Coming soon</span></div>

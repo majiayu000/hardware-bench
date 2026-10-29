@@ -47,15 +47,14 @@ export const BOARDS = [
   },  {
     id: 'pc-upgrade', name: 'PC upgrade: graphics card and SSD', accent: '#d0563a', level: 'Beginner', language: 'Hands-on',
     blurb: 'Swap a graphics card, add an M.2 NVMe SSD and a SATA SSD, then check everything works.',
+  },  {
+    id: 'jetson-orin-nano', name: 'NVIDIA Jetson Orin Nano Super', accent: '#76b900', level: 'Advanced', language: 'Shell + Python',
+    blurb: 'A desk-sized AI computer with a CUDA GPU: install JetPack, run language models with Ollama and detect objects from a webcam.',
   },
 ];
 
 // AI boards planned next, in suggested order (researched October 2026).
 export const COMING = [
-  {
-    name: 'NVIDIA Jetson Orin Nano Super', level: 'Advanced', tag: 'GPU · 67 TOPS',
-    blurb: 'A CUDA GPU computer for local AI: modern vision models, robotics and on-device LLMs. Needs Linux and deep-learning basics.',
-  },
 ];
 
 // 简体中文 for the hub page.
@@ -69,6 +68,7 @@ export const HUB_ZH = {
   'Early release: every pin and command is checked against official documentation, but not every lesson has been run on a real board yet.': '早期版本：每个引脚和命令都对照官方文档核对过，但还不是每节课都在真实板子上跑过。',
   'Found a mistake? Tell us': '发现错误？告诉我们', 'Report a mistake': '报告错误', 'Source code': '源代码',
   'XIAO ESP32S3 Sense': 'XIAO ESP32S3 Sense',
+  'A desk-sized AI computer with a CUDA GPU: install JetPack, run language models with Ollama and detect objects from a webcam.': '放在桌上的 AI 电脑，带 CUDA GPU：安装 JetPack，用 Ollama 运行语言模型，再用摄像头检测物体。',
   'PC upgrade: graphics card and SSD': '电脑升级：显卡和固态硬盘', 'Swap a graphics card, add an M.2 NVMe SSD and a SATA SSD, then check everything works.': '换一块显卡，加一块 M.2 NVMe 和一块 SATA 固态硬盘，再检查一切正常。',
   'A breadboard-sized Arduino with Wi-Fi: LEDs, buttons, an RGB LED, sound, an I²C sensor and a Wi-Fi weather station.': '插得进面包板、带 Wi-Fi 的 Arduino：LED、按钮、RGB LED、声音、I²C 传感器，最后做一个 Wi-Fi 气象站。',
   'Everything is built in: scroll text, make faces with the buttons, roll a dice by shaking, play music and send radio messages.': '所有东西都是内置的：滚动文字、用按钮变表情、摇一摇掷骰子、播放音乐，还能发无线消息。',
@@ -82,6 +82,5 @@ export const HUB_ZH = {
   'A Wi-Fi microcontroller: flash MicroPython, read sensors and control things from your phone.': '带 Wi-Fi 的微控制器：烧录 MicroPython、读取传感器，用手机控制设备。',
   'PC build: motherboard': '装机：主板', 'Hands-on': '动手装配',
   'Install the CPU, memory, SSD and cooler, wire the tricky front-panel pins, then take it all apart again.': '安装 CPU、内存、固态硬盘和散热器，接好最容易出错的前面板针脚，再把它们全部拆下来。',
-  'GPU · 67 TOPS': 'GPU · 67 TOPS',
-  'A CUDA GPU computer for local AI: modern vision models, robotics and on-device LLMs. Needs Linux and deep-learning basics.': '带 CUDA GPU 的本地 AI 电脑：现代视觉模型、机器人和端侧大模型。需要 Linux 和深度学习基础。',
+ 
 };
