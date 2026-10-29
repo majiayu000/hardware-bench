@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://majiayu000.github.io/hardware-bench/</loc></url>
+  <url><loc>https://majiayu000.github.io/hardware-bench/boards/arduino-uno/</loc></url>
+  <url><loc>https://majiayu000.github.io/hardware-bench/boards/esp32/</loc></url>
+  <url><loc>https://majiayu000.github.io/hardware-bench/boards/pc-motherboard/</loc></url>
+  <url><loc>https://majiayu000.github.io/hardware-bench/boards/raspberry-pi/</loc></url>
+  <url><loc>https://majiayu000.github.io/hardware-bench/boards/xiao-esp32s3-sense/</loc></url>
+</urlset>
