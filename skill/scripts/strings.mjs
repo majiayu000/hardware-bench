@@ -38,6 +38,7 @@ export function contentStrings({ SITE, BOARD, PIN_TYPES, LESSONS }) {
     (s.commands ?? []).forEach((c) => add(c.note));
     (s.steps ?? []).forEach((st) => add(st.text));
     (s.post ?? []).forEach(add);
+    (s.chats ?? []).forEach((c) => { add(c.q); add(c.a); });
     add(s.done);
     (l.kit ?? []).forEach(([qty, item, note]) => { add(qty); add(item); add(note); });
   }

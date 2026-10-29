@@ -35,15 +35,14 @@ export const BOARDS = [
   },  {
     id: 'pc-build', name: 'PC build: the whole PC', accent: '#3a6dd0', level: 'Beginner', language: 'Hands-on',
     blurb: 'Power supply, motherboard, graphics card, fans and cables into the case, then the first power-on and taking it apart.',
+  },  {
+    id: 'pi-ai-hat', name: 'Raspberry Pi 5 + AI HAT+ 2', accent: '#7a3fbf', level: 'Intermediate', language: 'Shell + Python',
+    blurb: 'Fit a 40 TOPS Hailo-10H accelerator, detect objects live from the camera and chat with a language model running on the Pi.',
   },
 ];
 
 // AI boards planned next, in suggested order (researched October 2026).
 export const COMING = [
-  {
-    name: 'Raspberry Pi 5 + AI HAT+ 2', level: 'Intermediate', tag: 'Hailo-10H · 40 TOPS',
-    blurb: 'Adds an AI accelerator with its own 8 GB of memory to the Pi 5: real-time object detection, plus small language and vision-language models.',
-  },
   {
     name: 'NVIDIA Jetson Orin Nano Super', level: 'Advanced', tag: 'GPU · 67 TOPS',
     blurb: 'A CUDA GPU computer for local AI: modern vision models, robotics and on-device LLMs. Needs Linux and deep-learning basics.',
@@ -61,6 +60,7 @@ export const HUB_ZH = {
   'Early release: every pin and command is checked against official documentation, but not every lesson has been run on a real board yet.': '早期版本：每个引脚和命令都对照官方文档核对过，但还不是每节课都在真实板子上跑过。',
   'Found a mistake? Tell us': '发现错误？告诉我们', 'Report a mistake': '报告错误', 'Source code': '源代码',
   'XIAO ESP32S3 Sense': 'XIAO ESP32S3 Sense',
+  'Fit a 40 TOPS Hailo-10H accelerator, detect objects live from the camera and chat with a language model running on the Pi.': '装上 40 TOPS 的 Hailo-10H 加速器，用摄像头实时检测物体，再和跑在树莓派上的语言模型对话。',
   'PC build: the whole PC': '装机：整机', 'Power supply, motherboard, graphics card, fans and cables into the case, then the first power-on and taking it apart.': '把电源、主板、显卡、风扇和线材装进机箱，然后第一次开机，再把它拆开。',
   'The cheapest way to start: blink, read buttons and knobs, make sounds, then build a Wi-Fi thermometer.': '最便宜的入门方式：闪灯、读按钮和旋钮、发出声音，最后做一个 Wi-Fi 温度计。',
   'An Uno with a Linux computer on board: sketches and Python talk over Bridge, plus the LED matrix, a phone web UI and on-board AI.': '板载一台 Linux 电脑的 Uno：Arduino 程序和 Python 通过 Bridge 对话，还有 LED 点阵、手机网页控制和板载 AI。',
@@ -70,7 +70,6 @@ export const HUB_ZH = {
   'A Wi-Fi microcontroller: flash MicroPython, read sensors and control things from your phone.': '带 Wi-Fi 的微控制器：烧录 MicroPython、读取传感器，用手机控制设备。',
   'PC build: motherboard': '装机：主板', 'Hands-on': '动手装配',
   'Install the CPU, memory, SSD and cooler, wire the tricky front-panel pins, then take it all apart again.': '安装 CPU、内存、固态硬盘和散热器，接好最容易出错的前面板针脚，再把它们全部拆下来。',
-  'Hailo-10H · 40 TOPS': 'Hailo-10H · 40 TOPS', 'GPU · 67 TOPS': 'GPU · 67 TOPS',
-  'Adds an AI accelerator with its own 8 GB of memory to the Pi 5: real-time object detection, plus small language and vision-language models.': '给树莓派 5 加上自带 8 GB 内存的 AI 加速器：实时目标检测，还能跑小型语言模型和视觉语言模型。',
+  'GPU · 67 TOPS': 'GPU · 67 TOPS',
   'A CUDA GPU computer for local AI: modern vision models, robotics and on-device LLMs. Needs Linux and deep-learning basics.': '带 CUDA GPU 的本地 AI 电脑：现代视觉模型、机器人和端侧大模型。需要 Linux 和深度学习基础。',
 };

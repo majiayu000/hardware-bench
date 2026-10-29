@@ -273,6 +273,8 @@ for (const l of LESSONS ?? []) {
       }
       for (const id of [...(s.lamps ?? []), ...Object.keys(s.idle ?? {})]) if (!partIds.has(id)) err(`${where} sequence lamp "${id}" is not in the circuit`);
     }
+    if (s.type === 'detect' && !s.objects?.every((o) => o.label && o.box?.length === 4)) err(`${where} detect sim needs objects [{ label, box: [x, y, w, h] }]`);
+    if (s.type === 'chat' && (!s.model || !s.chats?.every((c) => c.q && c.a))) err(`${where} chat sim needs model and chats [{ q, a }]`);
     if (s.type === 'matrix') {
       const size = s.frames?.[0]?.rows ? `${s.frames[0].rows.length}x${s.frames[0].rows[0].length}` : '';
       if (!s.frames?.length) err(`${where} matrix sim needs frames[]`);

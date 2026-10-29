@@ -7,6 +7,7 @@
 //         zoomTo(ref), part(id, state), trace(label), bubble(id, text|null), param(partId, key) }
 
 import { PC_SIMS } from './sims-pc.js';
+import { AI_SIMS } from './sims-ai.js';
 
 const timeNow = () => new Date().toLocaleTimeString('en-GB');
 const jitter = (v, amount) => v + (Math.random() - 0.5) * amount;
@@ -717,7 +718,7 @@ const SIMS = {
   },
 };
 
-Object.assign(SIMS, PC_SIMS);
+Object.assign(SIMS, PC_SIMS, AI_SIMS);
 
 export function createSim(type, el, ctx) {
   const factory = SIMS[type];
@@ -727,11 +728,11 @@ export function createSim(type, el, ctx) {
 
 export const SIM_TYPES = Object.keys(SIMS);
 // Sims started by the terminal's Run button (their lessons need run.cmd).
-export const RUNNABLE = ['led', 'button', 'rgb', 'distance', 'env', 'knob', 'camera', 'web', 'dashboard', 'buzzer', 'servo', 'parking', 'sequence', 'matrix'];
+export const RUNNABLE = ['led', 'button', 'rgb', 'distance', 'env', 'knob', 'camera', 'web', 'dashboard', 'buzzer', 'servo', 'parking', 'sequence', 'matrix', 'detect', 'chat'];
 // Labels each sim passes to ctx.trace(); a code file's `trace` maps them to line numbers.
 // A sequence also uses the `trace` of each of its steps, and a matrix the `trace` of each frame.
 export const TRACE_LABELS = {
   led: ['on', 'off'], button: ['wait', 'pressed', 'released'], rgb: ['set'], distance: ['read'], env: ['read'],
   knob: ['read'], camera: ['start', 'capture'], web: ['serve', 'on', 'off'], dashboard: ['reading'],
-  buzzer: ['tone', 'rest'], servo: ['write'], parking: ['read', 'beep'], sequence: ['wait', 'pressed'], matrix: [],
+  buzzer: ['tone', 'rest'], servo: ['write'], parking: ['read', 'beep'], sequence: ['wait', 'pressed'], matrix: [], detect: ['detect'], chat: ['serve', 'ask', 'reply'],
 };
