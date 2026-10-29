@@ -103,7 +103,7 @@ for (const h of B.headers ?? []) {
     pinKeys.add(`${h.id}:${p.n}`);
   }
 }
-if (!pinKeys.size) err('BOARD.headers must define at least one pin');
+if (!pinKeys.size && BOARD.headers?.length !== 0) err('BOARD.headers must define at least one pin (or be [] for a board with no pin headers, like a PC case)');
 
 // ---------- circuits ----------
 const CONTROL_KEYS = { ohms: ['resistor'], color: ['led'], distance: ['module'], value: ['pot', 'ldr'], angle: ['servo'] };
@@ -119,7 +119,8 @@ function checkCircuit(circuit, where) {
     if (!p.label) warn(`${pw} has no label (shown in popovers and the parts list)`);
     if (p.type === 'module' && p.preset && !MODULE_PRESETS.includes(p.preset)) err(`${pw}: preset must be one of ${MODULE_PRESETS.join(', ')}`);
     if (p.type === 'servo' && (!p.at || typeof p.at.x !== 'number')) err(`${pw}: servo needs at: { x, z } (it sits on the table)`);
-    if (['camera', 'casepanel', 'casebutton'].includes(p.type) && (!p.at || typeof p.at.x !== 'number')) err(`${pw}: ${p.type} needs at: { x, z }`);
+    if (['camera', 'casepanel', 'casebutton', 'block', 'fan'].includes(p.type) && (!p.at || typeof p.at.x !== 'number')) err(`${pw}: ${p.type} needs at: { x, z }`);
+    if (p.type === 'block' && !(p.w > 0 && p.d > 0 && p.h > 0)) err(`${pw}: block needs w, d and h`);
     if (p.type === 'camera' && !componentIds.has(p.connector)) err(`${pw}: connector "${p.connector}" is not a board component`);
     const comp = p.type === 'camera' ? null : partComponent(p);
     if (comp && !componentIds.has(comp)) err(`${pw}: "${comp}" is not a board component`);

@@ -32,6 +32,9 @@ export const BOARDS = [
   },  {
     id: 'pico-2-w', name: 'Raspberry Pi Pico 2 W', accent: '#c51a4a', level: 'Beginner', language: 'MicroPython',
     blurb: 'The cheapest way to start: blink, read buttons and knobs, make sounds, then build a Wi-Fi thermometer.',
+  },  {
+    id: 'pc-build', name: 'PC build: the whole PC', accent: '#3a6dd0', level: 'Beginner', language: 'Hands-on',
+    blurb: 'Power supply, motherboard, graphics card, fans and cables into the case, then the first power-on and taking it apart.',
   },
 ];
 
@@ -58,6 +61,7 @@ export const HUB_ZH = {
   'Early release: every pin and command is checked against official documentation, but not every lesson has been run on a real board yet.': '早期版本：每个引脚和命令都对照官方文档核对过，但还不是每节课都在真实板子上跑过。',
   'Found a mistake? Tell us': '发现错误？告诉我们', 'Report a mistake': '报告错误', 'Source code': '源代码',
   'XIAO ESP32S3 Sense': 'XIAO ESP32S3 Sense',
+  'PC build: the whole PC': '装机：整机', 'Power supply, motherboard, graphics card, fans and cables into the case, then the first power-on and taking it apart.': '把电源、主板、显卡、风扇和线材装进机箱，然后第一次开机，再把它拆开。',
   'The cheapest way to start: blink, read buttons and knobs, make sounds, then build a Wi-Fi thermometer.': '最便宜的入门方式：闪灯、读按钮和旋钮、发出声音，最后做一个 Wi-Fi 温度计。',
   'An Uno with a Linux computer on board: sketches and Python talk over Bridge, plus the LED matrix, a phone web UI and on-board AI.': '板载一台 Linux 电脑的 Uno：Arduino 程序和 Python 通过 Bridge 对话，还有 LED 点阵、手机网页控制和板载 AI。',
   'A thumb-sized AI board with a camera and a microphone: sensors, sound levels, photos, Wi-Fi and on-device face detection.': '拇指大小、带摄像头和麦克风的 AI 开发板：传感器、声音强度、拍照、Wi-Fi 和端侧人脸检测。',

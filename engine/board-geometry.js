@@ -82,7 +82,7 @@ export function resistorBands(ohms) {
 }
 
 export const PART_TYPES = ['led', 'resistor', 'button', 'rgbled', 'pot', 'module', 'camera', 'buzzer', 'servo', 'ldr',
-  'socketlid', 'cpu', 'cooler', 'dimm', 'm2', 'gpu', 'plug', 'powerplug', 'casepanel', 'casebutton'];
+  'socketlid', 'cpu', 'cooler', 'dimm', 'm2', 'gpu', 'plug', 'powerplug', 'casepanel', 'casebutton', 'block', 'fan'];
 // Parts whose legs go into breadboard holes (the rest sit on the board, in slots or on the table).
 export const BREADBOARD_PARTS = ['led', 'resistor', 'button', 'rgbled', 'pot', 'module', 'buzzer', 'ldr', 'servo'];
 // Which board component a slotted part refers to.

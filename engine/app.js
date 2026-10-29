@@ -510,7 +510,7 @@ const TABS = {
   overview: { label: 'Overview', has: () => true, render: (l) => renderBlocks(l.overview) },
   wiring: {
     label: (l) => (l.wiring ? 'Wiring' : 'Pinout'),
-    has: () => true,
+    has: (l) => Boolean(l.wiring) || BOARD.headers.length > 0,
     render(l) {
       const pins = lessonFocus().pins;
       let html = '';

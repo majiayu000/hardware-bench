@@ -370,5 +370,78 @@ export const PC_PARTS = {
     tag([cap], spec.id);
     return { group, ink, pickables: [cap], anchor: new THREE.Vector3(at.x, (spec.y ?? 60) + r + 2, rest + 2), insert: [0, 0, 40], setState({ pressed } = {}) { if (pressed != null) cap.position.z = pressed ? rest - 2.5 : rest; } };
   },
+  // A generic boxy part built from rounded boxes, for anything without its own model (a power
+  // supply, a bare motherboard, a case panel, a keycap…). `at: { x, z }` is the centre in board
+  // coordinates, `y` the height of its base above the board top (`table: true` measures from the
+  // table instead), `w`, `d`, `h` its size, `text` printed on top, `boxes` extra boxes placed relative
+  // to it ({ x, z, y, w, d, h, color, text }, `y` above its top), `opacity` for glass, and
+  // `insert: [dx, dy, dz]` the direction it is put in.
+  block(spec, ctx, k) {
+    const { THREE } = k;
+    const ink = k.inkMaterial();
+    const at = ctx.board(spec.at.x, spec.at.z);
+    const base = (spec.table ? 0 : ctx.top) + (spec.y ?? 0);
+    const group = new THREE.Group();
+    const meshes = [];
+    const box = (b, x, y, z) => {
+      const m = k.shape(k.Box(b.w, b.h, b.d, Math.min(b.w, b.d, b.h) * (b.round ?? 0.12)), b.color ?? '#2b2a33', ink);
+      if (b.opacity != null) Object.assign(m.material, { transparent: true, opacity: b.opacity, depthWrite: false });
+      m.position.set(x, y + b.h / 2, z);
+      group.add(m);
+      meshes.push(m);
+      if (b.text) {
+        const size = Math.min(b.w, b.d * 4) * 0.8;
+        const label = new THREE.Mesh(new THREE.PlaneGeometry(size, size / 4), k.flat(new THREE.MeshBasicMaterial({ map: k.textTexture(b.text, b.textColor ?? '#f4f1ea'), transparent: true })));
+        label.rotation.x = -Math.PI / 2;
+        label.position.set(x, y + b.h + 0.05, z);
+        group.add(label);
+      }
+    };
+    box(spec, at.x, base, at.z);
+    for (const b of spec.boxes ?? []) box(b, at.x + (b.x ?? 0), base + spec.h + (b.y ?? 0), at.z + (b.z ?? 0));
+    tag(meshes, spec.id);
+    const top = Math.max(spec.h, ...(spec.boxes ?? []).map((b) => spec.h + (b.y ?? 0) + b.h));
+    return { group, ink, pickables: meshes, anchor: new THREE.Vector3(at.x, base + top + 2, at.z), insert: spec.insert ?? [0, 60, 0] };
+  },
+
+  // A case fan. `at`, `y`, `table` as for block; `size` (mm, default 120); `facing`: 'up' (lying
+  // flat), 'x', '-x', 'z' or '-z' (standing, blowing that way). State: { spin } 0–1.
+  fan(spec, ctx, k) {
+    const { THREE } = k;
+    const ink = k.inkMaterial();
+    const at = ctx.board(spec.at.x, spec.at.z);
+    const s = spec.size ?? 120;
+    const base = (spec.table ? 0 : ctx.top) + (spec.y ?? 0);
+    const fan = new THREE.Group();
+    const frame = k.shape(k.Box(s, s, 25, s * 0.05), spec.color ?? '#2b2a33', ink);
+    const ring = new THREE.Mesh(new THREE.CircleGeometry(s * 0.46, 48), k.flat(k.toon('#14131a')));
+    ring.position.z = 12.6;
+    const rotor = new THREE.Group();
+    rotor.position.z = 12.9;
+    const hub = k.shape(new THREE.CylinderGeometry(s * 0.14, s * 0.14, 2, 32), spec.accent ?? '#3a6dd0', ink);
+    hub.rotation.x = Math.PI / 2;
+    rotor.add(hub);
+    for (let i = 0; i < 7; i += 1) {
+      const blade = k.shape(k.Box(s * 0.12, s * 0.28, 1.2, 0.6), spec.blade ?? '#3a3a44', ink);
+      blade.position.set(Math.sin((i / 7) * Math.PI * 2) * s * 0.28, Math.cos((i / 7) * Math.PI * 2) * s * 0.28, 0);
+      blade.rotation.z = -(i / 7) * Math.PI * 2 + 0.35;
+      rotor.add(blade);
+    }
+    fan.add(frame, ring, rotor);
+    const facing = spec.facing ?? 'up';
+    const [rx, ry] = { up: [-Math.PI / 2, 0], z: [0, 0], '-z': [0, Math.PI], x: [0, Math.PI / 2], '-x': [0, -Math.PI / 2] }[facing];
+    fan.rotation.set(rx, ry, 0, 'YXZ');
+    fan.position.set(at.x, base + (facing === 'up' ? 12.5 : s / 2), at.z);
+    const group = new THREE.Group();
+    group.add(fan);
+    tag([frame], spec.id);
+    let rpm = 0;
+    let target = spec.spin ?? 0;
+    return {
+      group, ink, pickables: [frame], anchor: new THREE.Vector3(at.x, base + (facing === 'up' ? 27 : s + 2), at.z), insert: spec.insert ?? [0, 60, 0],
+      setState({ spin } = {}) { if (spin != null) target = spin; },
+      tick(dt) { rpm += (target - rpm) * Math.min(1, dt * 1.5); rotor.rotation.z -= rpm * dt * 14; },
+    };
+  },
 };
 export const PC_PART_NAMES = Object.keys(PC_PARTS);

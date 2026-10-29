@@ -278,6 +278,7 @@ export function createBoardScene(container, board, { accent = '#c51a4a', onHover
         return W(p.x, BREADBOARD.height, p.z);
       },
       board: (x, z) => W(x, 0, z),
+      top,
       component: (id) => anchors.get(`component:${id}`)?.clone(),
       // A board component's footprint in world units (for parts that sit in slots and sockets).
       comp(id) {
@@ -661,7 +662,7 @@ export function createBoardScene(container, board, { accent = '#c51a4a', onHover
       if (!p) return;
       if ('shown' in state) p.group.visible = state.shown;
       if ('lift' in state) p.group.position.set(...p.insert.map((v) => v * state.lift));
-      p.setState(state);
+      p.setState?.(state);
     },
     hasPart: (id) => parts.has(id),
     project,
