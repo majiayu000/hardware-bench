@@ -41,6 +41,9 @@ export const BOARDS = [
   },  {
     id: 'microbit', name: 'BBC micro:bit V2', accent: '#00a3a6', level: 'Beginner', language: 'MicroPython',
     blurb: 'Everything is built in: scroll text, make faces with the buttons, roll a dice by shaking, play music and send radio messages.',
+  },  {
+    id: 'nano-esp32', name: 'Arduino Nano ESP32', accent: '#00878f', level: 'Beginner', language: 'C++',
+    blurb: 'A breadboard-sized Arduino with Wi-Fi: LEDs, buttons, an RGB LED, sound, an I²C sensor and a Wi-Fi weather station.',
   },
 ];
 
@@ -63,6 +66,7 @@ export const HUB_ZH = {
   'Early release: every pin and command is checked against official documentation, but not every lesson has been run on a real board yet.': '早期版本：每个引脚和命令都对照官方文档核对过，但还不是每节课都在真实板子上跑过。',
   'Found a mistake? Tell us': '发现错误？告诉我们', 'Report a mistake': '报告错误', 'Source code': '源代码',
   'XIAO ESP32S3 Sense': 'XIAO ESP32S3 Sense',
+  'A breadboard-sized Arduino with Wi-Fi: LEDs, buttons, an RGB LED, sound, an I²C sensor and a Wi-Fi weather station.': '插得进面包板、带 Wi-Fi 的 Arduino：LED、按钮、RGB LED、声音、I²C 传感器，最后做一个 Wi-Fi 气象站。',
   'Everything is built in: scroll text, make faces with the buttons, roll a dice by shaking, play music and send radio messages.': '所有东西都是内置的：滚动文字、用按钮变表情、摇一摇掷骰子、播放音乐，还能发无线消息。',
   'Fit a 40 TOPS Hailo-10H accelerator, detect objects live from the camera and chat with a language model running on the Pi.': '装上 40 TOPS 的 Hailo-10H 加速器，用摄像头实时检测物体，再和跑在树莓派上的语言模型对话。',
   'PC build: the whole PC': '装机：整机', 'Power supply, motherboard, graphics card, fans and cables into the case, then the first power-on and taking it apart.': '把电源、主板、显卡、风扇和线材装进机箱，然后第一次开机，再把它拆开。',
