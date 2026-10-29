@@ -91,7 +91,7 @@ for (const h of B.headers ?? []) {
   if (!h.label) err(`${where} needs a label`);
   if (!['dual', 'single'].includes(h.layout)) err(`${where} layout must be "dual" or "single"`);
   if (typeof h.x !== 'number' || typeof h.z !== 'number') err(`${where} needs numeric x/z for pin 1`);
-  if (h.style && !['male', 'female'].includes(h.style)) err(`${where} style must be "male" or "female"`);
+  if (h.style && !['male', 'female', 'pad'].includes(h.style)) err(`${where} style must be "male", "female" or "pad"`);
   const ns = (h.pins ?? []).map((p) => p.n);
   if (JSON.stringify([...ns].sort((a, b) => a - b)) !== JSON.stringify(ns.map((_, i) => i + 1))) err(`${where} pins must be numbered 1..${ns.length} with no gaps or repeats`);
   if (h.layout === 'dual' && ns.length % 2) err(`${where} is dual but has an odd pin count`);

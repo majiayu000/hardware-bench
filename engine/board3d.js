@@ -222,7 +222,9 @@ export function createBoardScene(container, board, { accent = '#c51a4a', onHover
   for (const header of board.headers ?? []) {
     const pitch = header.pitch ?? 2.54;
     const female = header.style === 'female';
-    const baseH = female ? 8.5 : 2.5;
+    // 'pad': flat gold contacts on the board edge (micro:bit rings and strips); padW × padD, optional hole.
+    const pad = header.style === 'pad';
+    const baseH = female ? 8.5 : pad ? 0.3 : 2.5;
     if (female) {
       const ps = header.pins.map((p) => pinPosition(header, p.n));
       const xs = ps.map((p) => p.x);
@@ -234,16 +236,27 @@ export function createBoardScene(container, board, { accent = '#c51a4a', onHover
     for (const pin of header.pins) {
       const p = pinPosition(header, pin.n);
       const key = `${header.id}:${pin.n}`;
-      const base = shape(new THREE.BoxGeometry(pitch, baseH, pitch), null, headerInk, { mat: baseMat });
+      const base = shape(new THREE.BoxGeometry(pad ? header.padW ?? pitch : pitch, baseH, pad ? header.padD ?? pitch : pitch), null, headerInk, { mat: baseMat });
       base.position.copy(W(p.x, top + baseH / 2, p.z));
       base.userData = { kind: 'pin', key, header: header.id, pin };
-      base.visible = !female; // female headers are drawn as one block; this stays as the hit box
+      base.visible = !female && !pad; // female headers are drawn as one block; this stays as the hit box
       let tip;
       if (pin.missing) {
         // Key position: the pin is left out on purpose so a plug only fits one way round.
         tip = new THREE.Mesh(new THREE.PlaneGeometry(pitch * 0.5, pitch * 0.5), holeMat);
         tip.rotation.x = -Math.PI / 2;
         tip.position.copy(W(p.x, top + baseH + 0.02, p.z));
+      } else if (pad) {
+        tip = new THREE.Group();
+        const plate = new THREE.Mesh(kit.Box(header.padW ?? pitch, 0.25, header.padD ?? pitch, 0.1), goldMat);
+        tip.add(plate);
+        if (header.padHole) {
+          const hole = new THREE.Mesh(new THREE.CircleGeometry(header.padHole / 2, 24), holeMat);
+          hole.rotation.x = -Math.PI / 2;
+          hole.position.y = 0.14;
+          tip.add(hole);
+        }
+        tip.position.copy(W(p.x, top + 0.13, p.z));
       } else if (female) {
         tip = new THREE.Mesh(new THREE.PlaneGeometry(pitch * 0.46, pitch * 0.46), holeMat);
         tip.rotation.x = -Math.PI / 2;
@@ -255,11 +268,12 @@ export function createBoardScene(container, board, { accent = '#c51a4a', onHover
       }
       tip.userData = base.userData;
       const marker = new THREE.Mesh(new THREE.SphereGeometry(0.9, 16, 12), new THREE.MeshBasicMaterial({ color: accent }));
-      marker.position.copy(W(p.x, top + (female ? baseH : 6) + 3.5, p.z));
+      marker.position.copy(W(p.x, top + (female ? baseH : pad ? 0 : 6) + 3.5, p.z));
       marker.visible = false;
       boardGroup.add(base, tip, marker);
-      pickables.push(base, tip);
-      pinMeshes.set(key, { tip, marker, restMat: female ? holeMat : goldMat });
+      pickables.push(base, ...(pad ? tip.children : [tip]));
+      if (pad) tip.children.forEach((m) => { m.userData = base.userData; });
+      pinMeshes.set(key, { tip: pad ? tip.children[0] : tip, marker, restMat: female ? holeMat : goldMat });
       anchors.set(`pin:${key}`, W(p.x, top + (female ? baseH : 6), p.z));
     }
   }
