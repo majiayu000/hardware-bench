@@ -129,7 +129,7 @@ export const UI_ZH = {
   'Numbered labels': '编号标注', 'Numbers on the parts and the key that explains them': '零件上的编号和对应的图例说明',
   'Hardware Bench': '硬件学堂', Key: '图例',
   'Found a mistake? Tell us': '发现错误？告诉我们',
-  Stopped: '已停止', 'Waiting for the button': '等待按下按钮', 'Press Run to start the sequence.': '点“运行”开始这个序列。',
+  Stopped: '已停止', 'Press Run to play the frames.': '点“运行”播放画面。', 'Waiting for the button': '等待按下按钮', 'Press Run to start the sequence.': '点“运行”开始这个序列。',
   'Floor grid': '地面网格', 'The faint grid under the board': '板子下方的浅色网格',
   Turntable: '自动旋转', 'Slowly turn the scene when idle': '空闲时缓慢旋转场景',
   'Reduce motion': '减少动画', 'Jump instead of animating': '直接跳转，不播放动画', 'Reset progress': '重置进度',

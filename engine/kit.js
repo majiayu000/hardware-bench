@@ -629,6 +629,22 @@ export function boardComponent(kit, c, { W, top, board, scale = 1.4 }) {
       if (c.lit) lens.material.emissive = new THREE.Color(c.accent ?? '#ffcf3a').multiplyScalar(0.8);
       break;
     }
+    // Grid of tiny LEDs; `grid: [cols, rows]`, `accent` LED colour.
+    case 'ledmatrix': {
+      const [cols, rows] = c.grid ?? [13, 8];
+      const px = c.w / cols;
+      const pz = d / rows;
+      const led = toon(c.accent ?? '#5aa9ff', { emissive: c.accent ?? '#5aa9ff' });
+      led.emissiveIntensity = 0.25;
+      for (let i = 0; i < cols; i += 1) {
+        for (let j = 0; j < rows; j += 1) {
+          const m = new THREE.Mesh(Box(px * 0.55, 0.3, pz * 0.55, 0.05), led);
+          m.position.set(center.x - c.w / 2 + (i + 0.5) * px, topY + 0.15, center.z - d / 2 + (j + 0.5) * pz);
+          group.add(m);
+        }
+      }
+      break;
+    }
     case 'crystal':
       add(Box(c.w * 1.04, 0.5, d * 1.08, d * 0.5), '#9aa0a8', center.x, top + 0.25, center.z);
       break;

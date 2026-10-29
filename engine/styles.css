@@ -385,6 +385,8 @@ body.no-3d .toolbar { display: none; }
 .sim-caption { margin: 10px 0 0 !important; color: var(--muted); font-size: 13px; }
 .sim-state { font-family: var(--font-mono); font-size: 12px; color: var(--muted); }
 .lamps { display: flex; gap: 10px; }
+.dotmatrix { display: grid; grid-template-columns: repeat(var(--cols), 1fr); gap: 5px; max-width: 360px; padding: 12px; border-radius: 8px; background: #11151a; }
+.dotmatrix i { aspect-ratio: 1; border-radius: 3px; background: var(--led); box-shadow: 0 0 6px var(--led); opacity: .12; transition: opacity .15s; }
 .lamps .led { width: 36px; height: 36px; }
 .seq-state { font-family: var(--font-mono); font-size: 13px; font-weight: 500; }
 .led { --led: #ff3b3b; width: 46px; height: 46px; flex: none; border-radius: 50% 50% 46% 46%; background: color-mix(in srgb, var(--led) 22%, #3a3530); box-shadow: inset 0 -6px 10px rgb(0 0 0 / 30%); transition: background .08s, box-shadow .08s; }

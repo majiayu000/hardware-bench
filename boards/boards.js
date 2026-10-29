@@ -26,15 +26,14 @@ export const BOARDS = [
   {
     id: 'xiao-esp32s3-sense', name: 'XIAO ESP32S3 Sense', accent: '#7cb518', level: 'Beginner', language: 'C++',
     blurb: 'A thumb-sized AI board with a camera and a microphone: sensors, sound levels, photos, Wi-Fi and on-device face detection.',
+  },  {
+    id: 'arduino-uno-q', name: 'Arduino UNO Q', accent: '#00878f', level: 'Intermediate', language: 'C++ + Python',
+    blurb: 'An Uno with a Linux computer on board: sketches and Python talk over Bridge, plus the LED matrix, a phone web UI and on-board AI.',
   },
 ];
 
 // AI boards planned next, in suggested order (researched October 2026).
 export const COMING = [
-  {
-    name: 'Arduino UNO Q', level: 'Beginner', tag: 'Linux + microcontroller',
-    blurb: 'Uno-shaped board with a Qualcomm Linux processor and an STM32 microcontroller. Arduino App Lab mixes sketches, Python and ready-made AI models for vision and voice.',
-  },
   {
     name: 'Raspberry Pi 5 + AI HAT+ 2', level: 'Intermediate', tag: 'Hailo-10H · 40 TOPS',
     blurb: 'Adds an AI accelerator with its own 8 GB of memory to the Pi 5: real-time object detection, plus small language and vision-language models.',
@@ -56,14 +55,14 @@ export const HUB_ZH = {
   'Early release: every pin and command is checked against official documentation, but not every lesson has been run on a real board yet.': '早期版本：每个引脚和命令都对照官方文档核对过，但还不是每节课都在真实板子上跑过。',
   'Found a mistake? Tell us': '发现错误？告诉我们', 'Report a mistake': '报告错误', 'Source code': '源代码',
   'XIAO ESP32S3 Sense': 'XIAO ESP32S3 Sense',
+  'An Uno with a Linux computer on board: sketches and Python talk over Bridge, plus the LED matrix, a phone web UI and on-board AI.': '板载一台 Linux 电脑的 Uno：Arduino 程序和 Python 通过 Bridge 对话，还有 LED 点阵、手机网页控制和板载 AI。',
   'A thumb-sized AI board with a camera and a microphone: sensors, sound levels, photos, Wi-Fi and on-device face detection.': '拇指大小、带摄像头和麦克风的 AI 开发板：传感器、声音强度、拍照、Wi-Fi 和端侧人脸检测。',
   'Build a desk gadget in every lesson: traffic light, night light, door chime, ruler, dial gauge and a parking sensor.': '每节课做一个桌面小装置：红绿灯、小夜灯、门铃、测距尺、指针表和倒车雷达。',
   'A full Linux computer with GPIO pins: Python, cameras, web servers and a weather station.': '带 GPIO 引脚的完整 Linux 电脑：Python、摄像头、网页服务器和气象站。',
   'A Wi-Fi microcontroller: flash MicroPython, read sensors and control things from your phone.': '带 Wi-Fi 的微控制器：烧录 MicroPython、读取传感器，用手机控制设备。',
   'PC build: motherboard': '装机：主板', 'Hands-on': '动手装配',
   'Install the CPU, memory, SSD and cooler, wire the tricky front-panel pins, then take it all apart again.': '安装 CPU、内存、固态硬盘和散热器，接好最容易出错的前面板针脚，再把它们全部拆下来。',
-  'Linux + microcontroller': 'Linux + 微控制器', 'Hailo-10H · 40 TOPS': 'Hailo-10H · 40 TOPS', 'GPU · 67 TOPS': 'GPU · 67 TOPS',
-  'Uno-shaped board with a Qualcomm Linux processor and an STM32 microcontroller. Arduino App Lab mixes sketches, Python and ready-made AI models for vision and voice.': '与 Uno 同尺寸，集成高通 Linux 处理器和 STM32 微控制器。Arduino App Lab 可以混合使用 Arduino 程序、Python 和现成的视觉、语音 AI 模型。',
+  'Hailo-10H · 40 TOPS': 'Hailo-10H · 40 TOPS', 'GPU · 67 TOPS': 'GPU · 67 TOPS',
   'Adds an AI accelerator with its own 8 GB of memory to the Pi 5: real-time object detection, plus small language and vision-language models.': '给树莓派 5 加上自带 8 GB 内存的 AI 加速器：实时目标检测，还能跑小型语言模型和视觉语言模型。',
   'A CUDA GPU computer for local AI: modern vision models, robotics and on-device LLMs. Needs Linux and deep-learning basics.': '带 CUDA GPU 的本地 AI 电脑：现代视觉模型、机器人和端侧大模型。需要 Linux 和深度学习基础。',
 };

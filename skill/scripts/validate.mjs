@@ -74,7 +74,7 @@ for (const c of B.components ?? []) {
   for (const k of ['x', 'z', 'w', 'h']) if (typeof c[k] !== 'number') err(`${where} needs numeric ${k}`);
   if (c.shape !== 'cylinder' && typeof c.d !== 'number') err(`${where} is a box and needs numeric d`);
   if (c.shape && !['box', 'cylinder'].includes(c.shape)) err(`${where} shape must be box or cylinder`);
-  const KINDS = ['chip', 'shield', 'usb', 'usbc', 'hdmi', 'ethernet', 'jst', 'fpc', 'button', 'dip', 'crystal', 'electrolytic', 'usbb', 'dcjack', 'regulator', 'ledsmd', ...PC_KIND_NAMES];
+  const KINDS = ['chip', 'shield', 'usb', 'usbc', 'hdmi', 'ethernet', 'jst', 'fpc', 'button', 'dip', 'crystal', 'electrolytic', 'usbb', 'dcjack', 'regulator', 'ledsmd', 'ledmatrix', ...PC_KIND_NAMES];
   if (c.kind && !KINDS.includes(c.kind)) err(`${where} kind must be one of ${KINDS.join(', ')}`);
   if (!inBounds(c.x, c.z, 25)) err(`${where} centre (${c.x}, ${c.z}) is far outside the board`);
 }
@@ -235,7 +235,7 @@ for (const l of LESSONS ?? []) {
     const lines = (c.source ?? '').trim().split('\n').length;
     for (const [label, line] of Object.entries(c.trace ?? {})) {
       if (!(line >= 1 && line <= lines)) err(`${where} code "${c.file}" trace.${label} = ${line} is outside 1..${lines}`);
-      const simLabels = [...(TRACE_LABELS[l.sim?.type] ?? []), ...(l.sim?.type === 'sequence' ? l.sim.steps.map((st) => st.trace).filter(Boolean) : [])];
+      const simLabels = [...(TRACE_LABELS[l.sim?.type] ?? []), ...(l.sim?.type === 'sequence' ? l.sim.steps.map((st) => st.trace).filter(Boolean) : []), ...(l.sim?.type === 'matrix' ? l.sim.frames.map((f) => f.trace).filter(Boolean) : [])];
       if (l.sim && !simLabels.includes(label)) err(`${where} code "${c.file}" trace label "${label}" is not used by sim "${l.sim.type}" (${simLabels.join(', ') || 'none'})`);
     }
   }
@@ -271,6 +271,14 @@ for (const l of LESSONS ?? []) {
         if (st.tone && !s.buzzer) err(`${where} sequence step ${i + 1} has a tone but the sim has no buzzer`);
       }
       for (const id of [...(s.lamps ?? []), ...Object.keys(s.idle ?? {})]) if (!partIds.has(id)) err(`${where} sequence lamp "${id}" is not in the circuit`);
+    }
+    if (s.type === 'matrix') {
+      const size = s.frames?.[0]?.rows ? `${s.frames[0].rows.length}x${s.frames[0].rows[0].length}` : '';
+      if (!s.frames?.length) err(`${where} matrix sim needs frames[]`);
+      for (const [i, f] of (s.frames ?? []).entries()) {
+        if (!f.rows?.every((r) => /^[0-7]+$/.test(r))) err(`${where} matrix frame ${i + 1}: rows must be strings of digits 0–7`);
+        else if (`${f.rows.length}x${f.rows[0].length}` !== size || f.rows.some((r) => r.length !== f.rows[0].length)) err(`${where} matrix frame ${i + 1} is not ${size}`);
+      }
     }
     for (const key of ['led', 'resistor', 'button', 'sensor', 'pot', 'servo', 'buzzer']) {
       if (s[key] && !partIds.has(s[key])) err(`${where} sim.${key} "${s[key]}" is not a part in this lesson's circuit`);

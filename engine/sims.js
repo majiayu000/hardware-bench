@@ -688,6 +688,33 @@ const SIMS = {
       destroy() { off(); audio?.close(); },
     };
   },
+
+  // A dot-matrix display playing frames, drawn in the panel. config: frames [{ rows: ['0070…'] (one
+  // string per row, one digit 0–7 per LED), ms, log, trace }], color, caption.
+  matrix(el, ctx) {
+    const { config, escape } = ctx;
+    const t = timers();
+    const rows = config.frames[0].rows.length;
+    const cols = config.frames[0].rows[0].length;
+    el.innerHTML = `<div class="sim"><div class="dotmatrix" style="--cols:${cols};--led:${escape(config.color ?? '#5aa9ff')}">${'<i></i>'.repeat(rows * cols)}</div>
+      <p class="sim-caption">${escape(config.caption ?? 'Press Run to play the frames.')}</p></div>`;
+    const dots = el.querySelectorAll('.dotmatrix i');
+    const show = (frame) => frame.rows.forEach((row, r) => [...row].forEach((v, c) => { dots[r * cols + c].style.opacity = String(0.12 + (Number(v) / 7) * 0.88); }));
+    const blank = () => dots.forEach((d) => { d.style.opacity = '0.12'; });
+    function play(i) {
+      const f = config.frames[i % config.frames.length];
+      show(f);
+      if (f.log) ctx.log(f.log);
+      ctx.trace(f.trace ?? null);
+      t.after(f.ms ?? 1000, () => play(i + 1));
+    }
+    blank();
+    return {
+      start() { t.clear(); play(0); },
+      stop() { t.clear(); blank(); ctx.trace(null); },
+      destroy: t.clear,
+    };
+  },
 };
 
 Object.assign(SIMS, PC_SIMS);
@@ -700,11 +727,11 @@ export function createSim(type, el, ctx) {
 
 export const SIM_TYPES = Object.keys(SIMS);
 // Sims started by the terminal's Run button (their lessons need run.cmd).
-export const RUNNABLE = ['led', 'button', 'rgb', 'distance', 'env', 'knob', 'camera', 'web', 'dashboard', 'buzzer', 'servo', 'parking', 'sequence'];
+export const RUNNABLE = ['led', 'button', 'rgb', 'distance', 'env', 'knob', 'camera', 'web', 'dashboard', 'buzzer', 'servo', 'parking', 'sequence', 'matrix'];
 // Labels each sim passes to ctx.trace(); a code file's `trace` maps them to line numbers.
-// A sequence also uses the `trace` of each of its steps.
+// A sequence also uses the `trace` of each of its steps, and a matrix the `trace` of each frame.
 export const TRACE_LABELS = {
   led: ['on', 'off'], button: ['wait', 'pressed', 'released'], rgb: ['set'], distance: ['read'], env: ['read'],
   knob: ['read'], camera: ['start', 'capture'], web: ['serve', 'on', 'off'], dashboard: ['reading'],
-  buzzer: ['tone', 'rest'], servo: ['write'], parking: ['read', 'beep'], sequence: ['wait', 'pressed'],
+  buzzer: ['tone', 'rest'], servo: ['write'], parking: ['read', 'beep'], sequence: ['wait', 'pressed'], matrix: [],
 };
