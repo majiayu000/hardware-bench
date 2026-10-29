@@ -1,5 +1,5 @@
 // Hub home page: board cards with live lesson counts and progress, plus the AI boards coming next.
-import { BOARDS, COMING, HUB_ZH, LINKS } from './boards/boards.js';
+import { BOARDS, COMING, GROUPS, HUB_ZH, LINKS } from './boards/boards.js';
 import { t, lang, setLang, addDict, observe } from './engine/i18n.js';
 
 addDict(HUB_ZH);
@@ -16,22 +16,25 @@ function readDone(siteId) {
 }
 
 async function renderBoards() {
-  const cards = await Promise.all(BOARDS.map(async (b) => {
-    const { SITE, LESSONS } = await import(`./boards/${b.id}/content.js`);
-    const done = readDone(SITE.id);
-    const pct = Math.round((done / LESSONS.length) * 100);
-    return `<a class="hub-card" href="boards/${b.id}/" style="--card: ${b.accent}">
-      <img class="hub-cover" src="boards/${b.id}/cover.png" alt="" loading="lazy">
-      <div class="hub-card-body">
-        <div class="hub-meta"><span class="chip-tag">${esc(b.level)}</span><span class="chip-tag mono">${esc(b.language)}</span><span class="hub-count">${esc(t('{n} lessons', { n: LESSONS.length }))}</span></div>
-        <h3>${esc(b.name)}</h3>
-        <p>${esc(b.blurb)}</p>
-        <div class="hub-progress"><span class="progress-track"><span class="progress-fill" style="width:${pct}%"></span></span><small>${esc(t('{a} of {b} done', { a: done, b: LESSONS.length }))}</small></div>
-        <span class="btn">${esc(t(done ? 'Continue' : 'Start learning'))} →</span>
-      </div>
-    </a>`;
-  }));
-  $('#boards').innerHTML = cards.join('');
+  const cards = await Promise.all(BOARDS.map(async (b) => [b.group, await card(b)]));
+  $('#boards').innerHTML = GROUPS.map((g) => `<h2 class="hub-h">${esc(t(g.title))}</h2>
+    <div class="hub-grid">${cards.filter(([group]) => group === g.id).map(([, html]) => html).join('')}</div>`).join('');
+}
+
+async function card(b) {
+  const { SITE, LESSONS } = await import(`./boards/${b.id}/content.js`);
+  const done = readDone(SITE.id);
+  const pct = Math.round((done / LESSONS.length) * 100);
+  return `<a class="hub-card" href="boards/${b.id}/" style="--card: ${b.accent}">
+    <img class="hub-cover" src="boards/${b.id}/cover.png" alt="" loading="lazy">
+    <div class="hub-card-body">
+      <div class="hub-meta"><span class="chip-tag">${esc(b.level)}</span><span class="chip-tag mono">${esc(b.language)}</span><span class="hub-count">${esc(t('{n} lessons', { n: LESSONS.length }))}</span></div>
+      <h3>${esc(b.name)}</h3>
+      <p>${esc(b.blurb)}</p>
+      <div class="hub-progress"><span class="progress-track"><span class="progress-fill" style="width:${pct}%"></span></span><small>${esc(t('{a} of {b} done', { a: done, b: LESSONS.length }))}</small></div>
+      <span class="btn">${esc(t(done ? 'Continue' : 'Start learning'))} →</span>
+    </div>
+  </a>`;
 }
 
 function renderComing() {

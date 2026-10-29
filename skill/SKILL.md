@@ -15,7 +15,7 @@ template/
   boards/<id>/           one board: index.html, content.js, zh.js, cover.png
 ```
 
-Your job is **content** for one board folder: `content.js` (board model, pin map, lessons, circuits, callouts, code) and `zh.js` (its Chinese translations). The boards in the template are complete worked examples; read the closest one first: Arduino Uno, Raspberry Pi 5 and ESP32-DevKitC for electronics courses with a breadboard, `xiao-esp32s3-sense` for a tiny AI board with an onboard camera and microphone (Arduino C++, a no-code model-deployment lesson), and `pc-motherboard` for an assembly course (no code: parts drop into sockets and slots, an `assembly` sim plays each step like a video, and a `boot` sim presses the case power button). `references/content-schema.md` is the field-by-field contract.
+Your job is **content** for one board folder: `content.js` (board model, pin map, lessons, circuits, callouts, code) and `zh.js` (its Chinese translations). The boards in the template are complete worked examples; read the closest one first: Arduino Uno, Raspberry Pi 5 and ESP32-DevKitC for electronics courses with a breadboard, `xiao-esp32s3-sense` for a tiny AI board with an onboard camera and microphone (Arduino C++, a no-code model-deployment lesson), `pc-motherboard` for an assembly course (no code: parts drop into sockets and slots, an `assembly` sim plays each step like a video, and a `boot` sim presses the case power button). For other builds, `pc-build`, `keyboard` and `soldering` show assemblies made only from generic `block` parts; `microbit` uses `pad` contacts and the `matrix` sim; `arduino-uno-q`, `pi-ai-hat` and `jetson-orin-nano` show two-processor boards, add-on accelerators and the `detect` / `chat` AI sims. `references/content-schema.md` is the field-by-field contract.
 
 ## Workflow
 
@@ -41,7 +41,7 @@ Your job is **content** for one board folder: `content.js` (board model, pin map
 3. **Create the board folder.**
    - New hub: `cp -R <this-skill-dir>/template <hub-dir>`, then delete example boards you don't want and their entries in `boards/boards.js`. Point `LINKS` in `boards/boards.js` at the new hub's own repository and issue tracker, and replace the canonical / `og:` URLs in every `index.html`, `robots.txt` and `sitemap.xml` with the new site's address.
    - Existing hub: `cp -R <hub>/boards/<closest example> <hub>/boards/<new-id>`.
-   - Add the board to `BOARDS` in `boards/boards.js` (and its blurb to `HUB_ZH`).
+   - Add the board to `BOARDS` in `boards/boards.js` with its `group` (a section in `GROUPS`: development boards, AI boards, hands-on builds), and its name and blurb to `HUB_ZH`.
 
 4. **Write `content.js`** following the schema:
    - `SITE`, `PIN_TYPES` and `BOARD`, with headers oriented as the schema describes.

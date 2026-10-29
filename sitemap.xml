@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://majiayu000.github.io/hardware-bench/</loc></url>
+  <url><loc>https://majiayu000.github.io/hardware-bench/boards/arduino-uno-q/</loc></url>
   <url><loc>https://majiayu000.github.io/hardware-bench/boards/arduino-uno/</loc></url>
   <url><loc>https://majiayu000.github.io/hardware-bench/boards/esp32/</loc></url>
+  <url><loc>https://majiayu000.github.io/hardware-bench/boards/jetson-orin-nano/</loc></url>
+  <url><loc>https://majiayu000.github.io/hardware-bench/boards/keyboard/</loc></url>
+  <url><loc>https://majiayu000.github.io/hardware-bench/boards/microbit/</loc></url>
+  <url><loc>https://majiayu000.github.io/hardware-bench/boards/nano-esp32/</loc></url>
+  <url><loc>https://majiayu000.github.io/hardware-bench/boards/pc-build/</loc></url>
   <url><loc>https://majiayu000.github.io/hardware-bench/boards/pc-motherboard/</loc></url>
+  <url><loc>https://majiayu000.github.io/hardware-bench/boards/pc-upgrade/</loc></url>
+  <url><loc>https://majiayu000.github.io/hardware-bench/boards/pi-ai-hat/</loc></url>
+  <url><loc>https://majiayu000.github.io/hardware-bench/boards/pico-2-w/</loc></url>
   <url><loc>https://majiayu000.github.io/hardware-bench/boards/raspberry-pi/</loc></url>
+  <url><loc>https://majiayu000.github.io/hardware-bench/boards/soldering/</loc></url>
   <url><loc>https://majiayu000.github.io/hardware-bench/boards/xiao-esp32s3-sense/</loc></url>
 </urlset>

@@ -8,11 +8,24 @@ Free, interactive electronics courses for real boards, in English and 简体中�
 
 | Course | Lessons | Language |
 |---|---|---|
+| **Development boards** | | |
 | Arduino Uno: Desk Gadgets | 10 | C++ |
 | Raspberry Pi 5: A Computer with Pins | 11 | Python |
 | ESP32 DevKitC: Wi-Fi in MicroPython | 10 | MicroPython |
-| PC Build: Motherboard | 12 | hands-on assembly |
+| Raspberry Pi Pico 2 W: MicroPython Starter | 10 | MicroPython |
+| BBC micro:bit V2: Code Your First Gadgets | 10 | MicroPython |
+| Arduino Nano ESP32: Small Board, Big Projects | 10 | C++ |
+| **AI boards** | | |
 | XIAO ESP32S3 Sense: Eyes and Ears | 10 | C++ |
+| Arduino UNO Q: Two Brains | 10 | C++ + Python |
+| Raspberry Pi 5 + AI HAT+ 2: Local AI | 8 | Shell + Python |
+| NVIDIA Jetson Orin Nano Super: AI on Your Desk | 8 | Shell + Python |
+| **Hands-on builds** | | |
+| PC Build: Motherboard | 12 | hands-on |
+| PC Build: From Parts to First Boot | 10 | hands-on |
+| PC Upgrade: Graphics Card and SSD | 8 | hands-on |
+| Mechanical Keyboard: Build Your Own | 8 | hands-on |
+| Soldering Basics: Your First Kit | 9 | hands-on |
 
 No account, no tracking, no build step: progress stays in your browser, and the site loads nothing from other servers.
 
@@ -64,4 +77,4 @@ The validator checks pins, breadboard holes, wires, labels, code-trace line numb
 ## Credits
 
 - Design inspired by [learn-arduino](https://learn-arduino-red.vercel.app/) by [@DilumSanjaya](https://x.com/DilumSanjaya).
-- Facts come from the vendors' own documentation: Arduino, Raspberry Pi, Espressif, Seeed Studio and Intel. Each `content.js` says which sources it follows.
+- Facts come from the vendors' own documentation: Arduino, Raspberry Pi, Espressif, Seeed Studio, the micro:bit Foundation, NVIDIA, Hailo and Intel. Each `content.js` says which sources it follows.

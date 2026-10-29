@@ -68,7 +68,7 @@ export const BOARD = {
 | `label`, `desc` | shown in tooltips, popovers, the Parts list and the `tour` sim; `desc` is one beginner-level sentence |
 | `shape` | `box` (needs `w`, `d`, `h`) or `cylinder` (`w` is the diameter) |
 | `x`, `z` | centre of the part. Ports may overhang the PCB edge |
-| `kind` | adds structure: `chip` (pads, pin-1 dot), `shield` (lid), `usb` (two openings; `accent` colours the tongues), `usbc`, `hdmi`, `ethernet` (opening + LEDs), `jst`, `fpc` (latch), `button` (cap; `accent`), and through-hole: `dip` (legs + notch), `crystal`, `electrolytic` (scored top; `accent` stripe), `usbb`, `dcjack`, `regulator` (tab), `ledsmd` (`accent` lens, `lit: true` glows). Port openings face the nearest board edge. PC boards add `socket` (CPU socket with pin-1 triangle), `slot` (DIMM or PCIe; runs along its longer side, `latches: 'both' \| 'end'`, `accent` latch colour), `m2slot` (`reach`: mm to the standoff), `heatsink` (`fins: 'x' \| 'z'`), `atx` (power connector, `grid: [cols, rows]` of square holes) and `iocluster` (rear ports) |
+| `kind` | adds structure: `chip` (pads, pin-1 dot), `shield` (lid), `usb` (two openings; `accent` colours the tongues), `usbc`, `hdmi`, `ethernet` (opening + LEDs), `jst`, `fpc` (latch), `button` (cap; `accent`), and through-hole: `dip` (legs + notch), `crystal`, `electrolytic` (scored top; `accent` stripe), `usbb`, `dcjack`, `regulator` (tab), `ledsmd` (`accent` lens, `lit: true` glows). Port openings face the nearest board edge. PC boards add `socket` (CPU socket with pin-1 triangle), `slot` (DIMM or PCIe; runs along its longer side, `latches: 'both' \| 'end'`, `accent` latch colour), `m2slot` (`reach`: mm to the standoff), `heatsink` (`fins: 'x' \| 'z'`), `atx` (power connector, `grid: [cols, rows]` of square holes) and `iocluster` (rear ports). `ledmatrix` draws a grid of small LEDs (`grid: [cols, rows]`, `accent` colour) |
 | `under: true` | part sits under the PCB (an SD slot, for example). It can still be a callout target |
 | `text`, `textSize`, `textColor` | optional marking printed on top; keep chip markings small and grey, like real silkscreen |
 
@@ -79,7 +79,8 @@ Model the parts a beginner should recognise. That is about 8 on a small dev boar
 ```js
 { id: 'gpio', label: '40-pin GPIO header', short: 'GPIO', desc: '…',
   layout: 'dual',          // 'dual': odd pins on row 1, even on row 2 (Pi style). 'single': one strip
-  style: 'male',           // 'male' (gold pins; jumpers use female ends) or 'female' (Arduino sockets)
+  style: 'male',           // 'male' (gold pins; jumpers use female ends), 'female' (Arduino sockets) or 'pad'
+                           // (flat contacts: micro:bit rings, solder pads; add padW, padD and optional padHole, mm)
   pitch: 2.54,
   x: 8.37, z: 4.77,        // centre of physical pin 1
   step: [2.54, 0],         // [dx, dz] to the next column (dual) or next pin (single)
@@ -87,6 +88,8 @@ Model the parts a beginner should recognise. That is about 8 on a small dev boar
   pins: [{ n: 1, name: '3V3', type: 'power3' }, { n: 3, name: 'GPIO2', alt: 'SDA', type: 'i2c' }, …] }
 ```
 
+- A board with no pin headers at all (a PC case, a keyboard) uses `headers: []`; its lessons then have no Pinout tab.
+- A course for an add-on (a HAT, a graphics card upgrade) can reuse another board's model: `import { BOARD, PIN_TYPES } from '../<board>/content.js'` and re-export them.
 - Pins are numbered `1..N` with no gaps, and `n` is the **physical** pin number. Lessons refer to pins as `"<headerId>:<n>"`.
 - A keyed position with no pin (PC front-panel, USB and audio headers) is still listed, with `missing: true`: it is drawn as an empty hole and still shows in the pinout table.
 - Boards with separate strips (Arduino: power, analog, digital; ESP32 DevKit: J2 and J3) get one `single` header per strip.
@@ -176,6 +179,8 @@ circuit: {
 | `powerplug` | `connector`: an `atx` component; `strands`, `colors`, `exit`, `reach` | none |
 | `casepanel` | `at: { x, z }` on the table; `w`, `color`, `label` | `{ power, hdd }` LEDs |
 | `casebutton` | `at`, `y` (height on the panel), `size`, `color`, `label` | `{ pressed }`; pressable in the scene |
+| `block` | Any part without its own model, built from rounded boxes: `at: { x, z }`, `w`, `d`, `h`, `y` (base above the board top; `table: true` measures from the table), `color`, `text`, `opacity` (glass), `round`, `boxes: [{ x, z, y, w, d, h, color, text }]` placed relative to it (`y` above its top), `insert: [dx, dy, dz]` | none (`shown` / `lift` only) |
+| `fan` | A case fan: `at`, `y`, `table`, `size` (mm), `facing: 'up' \| 'x' \| '-x' \| 'z' \| '-z'`, `color`, `accent` | `{ spin }` 0–1 |
 
 Keep the case panel off the line between the camera and the headers it is wired to (beside the board, not in front of it), or it hides the plugs.
 
@@ -258,6 +263,9 @@ Every string a sim prints can be overridden in its config, so no board's wording
 | `buzzer` | `buzzer`, `melody: [[name, hz, ms]]` (hz 0 = rest), `pin`, `log` | plays the melody; optional quiet Web Audio sound |
 | `servo` | `servo`, `min`, `max`, `step`, `every` | sweeps; slider / popover sets the angle when stopped |
 | `parking` | `sensor`, `buzzer`, `led`, `near`, `max` | beeps faster as the object gets closer; LED under `near` |
+| `matrix` | `frames: [{ rows: ['0070…'] (one string per row, digits 0–7), ms, log, trace }]`, `color`, `caption` | plays the frames on a dot-matrix panel (LED matrices, the micro:bit display). Each frame's `trace` is a code-trace label |
+| `detect` | `objects: [{ label, box: [x, y, w, h] (0–1 of the frame), score, color, fill }]`, `fps`, `start`, `caption` | a camera frame with labelled boxes that jitter like a live detector; logs `label score` |
+| `chat` | `model`, `chats: [{ q, a }]`, `path`, `start`, `caption` | a chat window: Run starts the “server”, each question streams its example answer word by word. Trace labels `serve`, `ask`, `reply` |
 | `sequence` | `lamps` (LED ids shown in the panel), `steps: [{ set: { ledId: true \| false }, tone, ms, log, trace }]`, optional `buzzer`, `button`, `idle` | timed light and tone patterns (traffic lights, chimes). Without `button` it loops; with one, Run waits in `idle` and each press plays the steps once. `log` is what the sketch prints; each step's `trace` is a code-trace label |
 | `assembly` | `steps: [{ do: 'insert' \| 'remove' \| 'set', parts: [ids], text, zoom, pins, from, to, seconds }]`, `mode: 'assemble' \| 'disassemble'`, `done` | a step-by-step "video" player (play, pause, step, scrub). `insert` lowers parts into place, `remove` lifts them out, `set` tweens state such as `{ open }` from `from` to `to`. `zoom` is the part the camera moves to; `pins` are highlighted. In `assemble` mode the scene outside Try it shows the finished build |
 | `boot` | `power`, `reset` (casebutton ids), `panel`, `fans`, `powerPins`, `resetPins`, `post` (log lines) | power and reset buttons, in the panel or in 3D: fans spin, LEDs light, POST lines print; holding power 4 s forces it off |
