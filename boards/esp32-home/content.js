@@ -299,7 +299,7 @@ ${DHT_YAML}
 
 time:
   - platform: homeassistant
-    id: clock
+    id: ha_time
 
 i2c:
   sda: GPIO21
@@ -318,7 +318,7 @@ display:
     model: "SSD1306 128x64"
     address: 0x3C
     lambda: |-
-      it.strftime(0, 0, id(big), "%H:%M", id(clock).now());
+      it.strftime(0, 0, id(big), "%H:%M", id(ha_time).now());
       it.printf(0, 34, id(small), "In  %.1f°C", id(room_temp).state);
       it.printf(0, 50, id(small), "Out %.1f°C", id(outside).state);
 ` }],
