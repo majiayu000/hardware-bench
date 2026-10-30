@@ -65,7 +65,7 @@ from machine import Pin
 import secrets
 
 led = Pin(14, Pin.OUT)            # D5
-PAGE = '<h1>ESP8266 LED</h1><a href="/on">ON</a> <a href="/off">OFF</a>'
+PAGE = b'<h1>ESP8266 LED</h1><a href="/on">ON</a> <a href="/off">OFF</a>'
 
 wlan = network.WLAN(network.STA_IF)
 wlan.active(True)

@@ -129,7 +129,7 @@ export const LESSONS = [
       { file: 'blink.v', lang: 'verilog', trace: { on: 10, off: 10 }, source: `
 module blink (
     input  wire clk,   // 27 MHz
-    output reg  led    // 0 = lit
+    output reg  led = 1    // 0 = lit
 );
     reg [23:0] counter = 0;
 
