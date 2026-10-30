@@ -1,16 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://majiayu000.github.io/hardware-bench/</loc></url>
+  <url><loc>https://majiayu000.github.io/hardware-bench/boards/arduino-mega/</loc></url>
+  <url><loc>https://majiayu000.github.io/hardware-bench/boards/arduino-nano/</loc></url>
   <url><loc>https://majiayu000.github.io/hardware-bench/boards/arduino-uno/</loc></url>
   <url><loc>https://majiayu000.github.io/hardware-bench/boards/arduino-uno-q/</loc></url>
+  <url><loc>https://majiayu000.github.io/hardware-bench/boards/beaglebone-black/</loc></url>
   <url><loc>https://majiayu000.github.io/hardware-bench/boards/esp32/</loc></url>
   <url><loc>https://majiayu000.github.io/hardware-bench/boards/esp32-c6/</loc></url>
   <url><loc>https://majiayu000.github.io/hardware-bench/boards/esp32-home/</loc></url>
+  <url><loc>https://majiayu000.github.io/hardware-bench/boards/esp32-s3/</loc></url>
+  <url><loc>https://majiayu000.github.io/hardware-bench/boards/esp8266-nodemcu/</loc></url>
+  <url><loc>https://majiayu000.github.io/hardware-bench/boards/feather-rp2040/</loc></url>
   <url><loc>https://majiayu000.github.io/hardware-bench/boards/jetson-orin-nano/</loc></url>
   <url><loc>https://majiayu000.github.io/hardware-bench/boards/keyboard/</loc></url>
   <url><loc>https://majiayu000.github.io/hardware-bench/boards/m5stack-cores3/</loc></url>
+  <url><loc>https://majiayu000.github.io/hardware-bench/boards/maixcam/</loc></url>
   <url><loc>https://majiayu000.github.io/hardware-bench/boards/microbit/</loc></url>
+  <url><loc>https://majiayu000.github.io/hardware-bench/boards/milkv-duo/</loc></url>
   <url><loc>https://majiayu000.github.io/hardware-bench/boards/nano-esp32/</loc></url>
+  <url><loc>https://majiayu000.github.io/hardware-bench/boards/nicla-vision/</loc></url>
+  <url><loc>https://majiayu000.github.io/hardware-bench/boards/orange-pi-5/</loc></url>
   <url><loc>https://majiayu000.github.io/hardware-bench/boards/pc-build/</loc></url>
   <url><loc>https://majiayu000.github.io/hardware-bench/boards/pc-cooling/</loc></url>
   <url><loc>https://majiayu000.github.io/hardware-bench/boards/pc-motherboard/</loc></url>
@@ -21,7 +31,10 @@
   <url><loc>https://majiayu000.github.io/hardware-bench/boards/pico-2-w/</loc></url>
   <url><loc>https://majiayu000.github.io/hardware-bench/boards/raspberry-pi/</loc></url>
   <url><loc>https://majiayu000.github.io/hardware-bench/boards/soldering/</loc></url>
+  <url><loc>https://majiayu000.github.io/hardware-bench/boards/stm32-bluepill/</loc></url>
   <url><loc>https://majiayu000.github.io/hardware-bench/boards/stm32-nucleo/</loc></url>
+  <url><loc>https://majiayu000.github.io/hardware-bench/boards/tang-nano-9k/</loc></url>
+  <url><loc>https://majiayu000.github.io/hardware-bench/boards/teensy-41/</loc></url>
   <url><loc>https://majiayu000.github.io/hardware-bench/boards/uno-car/</loc></url>
   <url><loc>https://majiayu000.github.io/hardware-bench/boards/uno-modules/</loc></url>
   <url><loc>https://majiayu000.github.io/hardware-bench/boards/uno-sensors/</loc></url>

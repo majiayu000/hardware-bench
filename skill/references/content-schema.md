@@ -1,7 +1,7 @@
 # content.js schema
 
 Each board lives in `boards/<id>/` of a hub and has four files:
-- `content.js` – everything below. It may import helpers from `../../engine/board-geometry.js` (e.g. `pinPosition`).
+- `content.js` – everything below. It may import helpers from `../../engine/board-geometry.js` (e.g. `pinPosition`) and the shared first-lesson circuits from `../../engine/starter-circuit.js`.
 - `zh.js` – `export default { 'English string': '中文', … }` for every user-visible string (`scripts/strings.mjs` lists them). Keys may use `{placeholders}`.
 - `index.html` – copy from another board; change `<title>`, description and favicon colour only.
 - `cover.png` – 16:9 screenshot for the hub card.
@@ -129,7 +129,7 @@ Tabs appear automatically:
 - **Try it:** if it has `sim`.
 - **Kit:** if it has `kit`.
 
-`lang` is `python`, `bash`, `cpp`, `javascript`, `ini`, `yaml` or `text`.
+`lang` is `python`, `bash`, `cpp`, `javascript`, `ini`, `yaml`, `verilog` or `text`.
 
 ### circuit
 

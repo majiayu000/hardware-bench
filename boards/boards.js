@@ -56,6 +56,50 @@ export const BOARDS = [
     blurb: 'An ESP32-S3 in a finished case: draw on the touch screen, read taps and tilt, and plug in sensors without wiring.',
   },
   {
+    id: 'arduino-mega', group: 'boards', name: 'Arduino Mega 2560', accent: '#00787a', level: 'Beginner', language: 'C++',
+    blurb: 'More of everything than an Uno: the double header, interrupts, extra serial ports, 16 analog inputs and I²C.',
+  },
+  {
+    id: 'arduino-nano', group: 'boards', name: 'Arduino Nano', accent: '#1f8a9e', level: 'Beginner', language: 'C++',
+    blurb: 'The Uno’s chip in a breadboard-sized board: IDE setup and bootloaders, LEDs, a button and a PWM dimmer.',
+  },
+  {
+    id: 'esp8266-nodemcu', group: 'boards', name: 'ESP8266 NodeMCU', accent: '#2c7fb8', level: 'Beginner', language: 'MicroPython',
+    blurb: 'The original cheap Wi-Fi board: flash MicroPython, LEDs, a button, the analog input and a Wi-Fi light switch.',
+  },
+  {
+    id: 'esp32-s3', group: 'boards', name: 'ESP32-S3-DevKitC-1', accent: '#c8372d', level: 'Intermediate', language: 'C++',
+    blurb: 'USB on the chip: mix colours on the RGB LED, make touch buttons from wires and turn the board into a keyboard.',
+  },
+  {
+    id: 'teensy-41', group: 'boards', name: 'Teensy 4.1', accent: '#2d8c3c', level: 'Intermediate', language: 'C++',
+    blurb: 'Arduino code at 600 MHz: build USB MIDI instruments and controls, and log data to the built-in microSD socket.',
+  },
+  {
+    id: 'stm32-bluepill', group: 'boards', name: 'STM32 Blue Pill', accent: '#2a5cc4', level: 'Intermediate', language: 'C++',
+    blurb: 'Program a bare Arm chip with an ST-LINK: LEDs, a button, the 12-bit ADC and an I²C sensor.',
+  },
+  {
+    id: 'feather-rp2040', group: 'boards', name: 'Adafruit Feather RP2040', accent: '#7a4fd0', level: 'Beginner', language: 'CircuitPython',
+    blurb: 'Python on a USB drive: edit code.py and save. NeoPixel, analog input, plug-in sensors and a USB keyboard.',
+  },
+  {
+    id: 'orange-pi-5', group: 'boards', name: 'Orange Pi 5', accent: '#e8761e', level: 'Intermediate', language: 'Python',
+    blurb: 'Eight cores and a 6 TOPS NPU: flash Linux, drive GPIO with wiringOP and run a neural network on the NPU.',
+  },
+  {
+    id: 'beaglebone-black', group: 'boards', name: 'BeagleBone Black', accent: '#2f6f8f', level: 'Intermediate', language: 'Python',
+    blurb: 'Linux with 92 header pins: log in over USB, GPIO in Python, and the 1.8 V analog inputs a Raspberry Pi lacks.',
+  },
+  {
+    id: 'milkv-duo', group: 'boards', name: 'Milk-V Duo', accent: '#3a9d7a', level: 'Advanced', language: 'C',
+    blurb: 'Linux on a thumb-sized RISC-V board: boot, log in over USB, cross-compile C and drive GPIO with wiringX.',
+  },
+  {
+    id: 'tang-nano-9k', group: 'boards', name: 'Tang Nano 9K', accent: '#c0392b', level: 'Advanced', language: 'Verilog',
+    blurb: 'Your first FPGA: describe hardware in Verilog, with a blink counter, running lights and logic gates.',
+  },
+  {
     id: 'uno-modules', group: 'projects', name: 'Arduino Uno: displays and motors', accent: '#2f8f83', level: 'Beginner', language: 'C++',
     blurb: 'The modules every kit includes: OLED, LCD1602, WS2812 LEDs, a relay, a DC motor with its driver, a stepper and a joystick.',
   },
@@ -86,6 +130,14 @@ export const BOARDS = [
   {
     id: 'jetson-orin-nano', group: 'ai', name: 'NVIDIA Jetson Orin Nano Super', accent: '#76b900', level: 'Advanced', language: 'Shell + Python',
     blurb: 'A desk-sized AI computer with a CUDA GPU: install JetPack, run language models with Ollama and detect objects from a webcam.',
+  },
+  {
+    id: 'maixcam', group: 'ai', name: 'Sipeed MaixCAM', accent: '#1f9d8a', level: 'Beginner', language: 'Python',
+    blurb: 'A pocket AI camera with a screen: live video, colour tracking and YOLOv5 object detection in a few lines of Python.',
+  },
+  {
+    id: 'nicla-vision', group: 'ai', name: 'Arduino Nicla Vision', accent: '#00979d', level: 'Intermediate', language: 'MicroPython',
+    blurb: 'A camera the size of a coin: OpenMV, colour tracking, a laser distance sensor and motion sensing.',
   },
   {
     id: 'pc-motherboard', group: 'builds', name: 'PC build: motherboard', accent: '#3a6dd0', level: 'Beginner', language: 'Hands-on',
@@ -158,6 +210,20 @@ export const HUB_ZH = {
   'ESP32 smart home': 'ESP32 智能家居', 'ESPHome and Home Assistant: a lamp relay, a motion sensor, temperature, an automation and an OLED desk screen.': 'ESPHome 与 Home Assistant：继电器控灯、人体传感器、温度、自动化和 OLED 桌面屏。',
   'PC cooling: AIO, fans and RGB': '电脑散热：水冷、风扇与 RGB', 'How a liquid cooler works and how to fit it, fan headers and fan curves, and 12 V RGB versus 5 V ARGB.': '水冷的原理和安装、风扇插座与风扇曲线，以及 12 V RGB 和 5 V ARGB 的区别。',
   'Raspberry Pi 5: cooler and NVMe SSD': '树莓派 5：散热器与 NVMe 固态硬盘', 'Fit the Active Cooler and an M.2 HAT+ with an NVMe drive, switch on PCIe Gen 3 and boot from the SSD.': '装上主动散热器和带 NVMe 硬盘的 M.2 HAT+，开启 PCIe Gen 3，从固态硬盘启动。',
+  'Arduino Mega 2560': 'Arduino Mega 2560', 'More of everything than an Uno: the double header, interrupts, extra serial ports, 16 analog inputs and I²C.': '比 Uno 多得多：双排排针、中断、多个串口、16 路模拟输入和 I²C。',
+  'Arduino Nano': 'Arduino Nano', 'The Uno’s chip in a breadboard-sized board: IDE setup and bootloaders, LEDs, a button and a PWM dimmer.': '面包板大小的 Uno：IDE 设置与引导程序、LED、按键和 PWM 调光。',
+  'ESP8266 NodeMCU': 'ESP8266 NodeMCU', 'The original cheap Wi-Fi board: flash MicroPython, LEDs, a button, the analog input and a Wi-Fi light switch.': '经典的廉价 Wi-Fi 板：烧录 MicroPython，LED、按键、模拟输入和 Wi-Fi 电灯开关。',
+  'ESP32-S3-DevKitC-1': 'ESP32-S3-DevKitC-1', 'USB on the chip: mix colours on the RGB LED, make touch buttons from wires and turn the board into a keyboard.': '芯片自带 USB：RGB LED 调色，用导线做触摸按键，把板子变成键盘。',
+  'Teensy 4.1': 'Teensy 4.1', 'Arduino code at 600 MHz: build USB MIDI instruments and controls, and log data to the built-in microSD socket.': '600 MHz 的 Arduino 代码：做 USB MIDI 乐器和控制器，把数据记录到板载 microSD。',
+  'STM32 Blue Pill': 'STM32 Blue Pill', 'Program a bare Arm chip with an ST-LINK: LEDs, a button, the 12-bit ADC and an I²C sensor.': '用 ST-LINK 给裸 Arm 芯片编程：LED、按键、12 位 ADC 和 I²C 传感器。',
+  'Adafruit Feather RP2040': 'Adafruit Feather RP2040', 'Python on a USB drive: edit code.py and save. NeoPixel, analog input, plug-in sensors and a USB keyboard.': 'U 盘里的 Python：改 code.py 保存就运行。NeoPixel、模拟输入、即插传感器和 USB 键盘。',
+  'Orange Pi 5': 'Orange Pi 5', 'Eight cores and a 6 TOPS NPU: flash Linux, drive GPIO with wiringOP and run a neural network on the NPU.': '八核加 6 TOPS NPU：刷 Linux，用 wiringOP 控制 GPIO，在 NPU 上跑神经网络。',
+  'BeagleBone Black': 'BeagleBone Black', 'Linux with 92 header pins: log in over USB, GPIO in Python, and the 1.8 V analog inputs a Raspberry Pi lacks.': '带 92 个引脚的 Linux：USB 登录，用 Python 控制 GPIO，以及树莓派没有的 1.8 V 模拟输入。',
+  'Milk-V Duo': 'Milk-V Duo', 'Linux on a thumb-sized RISC-V board: boot, log in over USB, cross-compile C and drive GPIO with wiringX.': '拇指大小的 RISC-V Linux 板：启动、USB 登录、交叉编译 C，用 wiringX 控制 GPIO。',
+  'Tang Nano 9K': 'Tang Nano 9K', 'Your first FPGA: describe hardware in Verilog, with a blink counter, running lights and logic gates.': '你的第一块 FPGA：用 Verilog 描述硬件，计数器闪灯、跑马灯和逻辑门。',
+  'Sipeed MaixCAM': 'Sipeed MaixCAM', 'A pocket AI camera with a screen: live video, colour tracking and YOLOv5 object detection in a few lines of Python.': '带屏幕的口袋 AI 相机：几行 Python 实现实时画面、颜色追踪和 YOLOv5 物体识别。',
+  'Arduino Nicla Vision': 'Arduino Nicla Vision', 'A camera the size of a coin: OpenMV, colour tracking, a laser distance sensor and motion sensing.': '硬币大小的相机：OpenMV、颜色追踪、激光测距和运动感知。',
+  CircuitPython: 'CircuitPython', C: 'C', Verilog: 'Verilog',
   'PC build: motherboard': '装机：主板', 'Hands-on': '动手装配',
   'Install the CPU, memory, SSD and cooler, wire the tricky front-panel pins, then take it all apart again.': '安装 CPU、内存、固态硬盘和散热器，接好最容易出错的前面板针脚，再把它们全部拆下来。',
  

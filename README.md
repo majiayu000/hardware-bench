@@ -19,6 +19,17 @@ Free, interactive electronics courses for real boards, in English and 简体中�
 | STM32 Nucleo-F401RE: Arduino Meets Arm | 6 | C++ |
 | Raspberry Pi Zero 2 W: A Tiny Linux Computer | 5 | Python |
 | M5Stack CoreS3: A Gadget in a Box | 6 | C++ |
+| Arduino Mega 2560: When the Uno Runs Out of Pins | 6 | C++ |
+| Arduino Nano: The Uno for Breadboards | 5 | C++ |
+| ESP8266 NodeMCU: The Original Wi-Fi Board | 6 | MicroPython |
+| ESP32-S3 DevKitC: USB, Touch and Colour | 6 | C++ |
+| Teensy 4.1: A 600 MHz Microcontroller | 6 | C++ |
+| STM32 Blue Pill: Arm for Very Little Money | 6 | C++ |
+| Adafruit Feather RP2040: Python as a USB Drive | 6 | CircuitPython |
+| Orange Pi 5: Eight Cores and an NPU | 5 | Python |
+| BeagleBone Black: 92 Pins and Linux | 5 | Python |
+| Milk-V Duo: Linux on a Thumb-Sized RISC-V Board | 4 | C |
+| Tang Nano 9K: Describe Hardware with Verilog | 5 | Verilog |
 | **Modules and projects** | | |
 | Arduino Uno: Displays and Motors | 8 | C++ |
 | Arduino Uno: Sensors and Modules | 8 | C++ |
@@ -29,6 +40,8 @@ Free, interactive electronics courses for real boards, in English and 简体中�
 | Arduino UNO Q: Two Brains | 10 | C++ + Python |
 | Raspberry Pi 5 + AI HAT+ 2: Local AI | 8 | Shell + Python |
 | NVIDIA Jetson Orin Nano Super: AI on Your Desk | 8 | Shell + Python |
+| Sipeed MaixCAM: An AI Camera You Program in Python | 5 | Python |
+| Arduino Nicla Vision: A Camera the Size of a Coin | 6 | MicroPython |
 | **Hands-on builds** | | |
 | PC Build: Motherboard | 12 | hands-on |
 | PC Build: From Parts to First Boot | 10 | hands-on |
@@ -88,4 +101,4 @@ The validator checks pins, breadboard holes, wires, labels, code-trace line numb
 ## Credits
 
 - Design inspired by [learn-arduino](https://learn-arduino-red.vercel.app/) by [@DilumSanjaya](https://x.com/DilumSanjaya).
-- Facts come from the vendors' own documentation: Arduino, Raspberry Pi, Espressif, STMicroelectronics, M5Stack, Seeed Studio, the micro:bit Foundation, NVIDIA, Hailo, Intel, ESPHome and the module and library makers. Each `content.js` says which sources it follows.
+- Facts come from the vendors' own documentation: Arduino, Raspberry Pi, Espressif, STMicroelectronics, M5Stack, Seeed Studio, the micro:bit Foundation, NVIDIA, Hailo, Intel, ESPHome, PJRC, Adafruit, Orange Pi, BeagleBoard, Milk-V, Sipeed, OpenMV and the module and library makers. Each `content.js` says which sources it follows.

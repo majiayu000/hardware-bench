@@ -168,7 +168,7 @@ function checkCircuit(circuit, where) {
 }
 
 // ---------- LESSONS ----------
-const LANGS = new Set(['python', 'bash', 'ini', 'cpp', 'javascript', 'yaml', 'text']);
+const LANGS = new Set(['python', 'bash', 'ini', 'cpp', 'javascript', 'yaml', 'verilog', 'text']);
 const BLOCKS = ['h', 'steps', 'tips', 'note', 'specs', 'cmd'];
 function checkBlocks(blocks, where) {
   if (blocks == null) return;
