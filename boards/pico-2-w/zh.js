@@ -82,7 +82,7 @@ export default {
   'GPIO pins are **3.3 V**. Never connect 5 V (VBUS or VSYS) to a GP pin.': 'GPIO 引脚是 **3.3 V**。千万不要把 5 V（VBUS 或 VSYS）接到 GP 引脚上。',
   'Specifications': '规格参数',
   'Chip': '芯片',
-  'RP2350, 2 × Cortex-M33 @ 150 MHz': 'RP2350，2 × Cortex-M33 @ 150 MHz',
+  'RP2350, 2 × Cortex-M33 @ 150 MHz': 'RP2350，双核 Cortex-M33，主频 150 MHz',
   'Memory': '内存',
   '520 KB RAM, 4 MB flash': '520 KB 内存，4 MB 闪存',
   'Wireless': '无线',
@@ -252,4 +252,10 @@ export default {
   'Pico thermometer': 'Pico 温度计',
   'USB phone charger': 'USB 手机充电器',
   'To run it away from the computer.': '让它脱离电脑运行。',
+  // names kept in English
+  'Pico 2 W': 'Pico 2 W',
+  'MicroPython': 'MicroPython',
+  'MicroPython (Raspberry Pi Pico)': 'MicroPython (Raspberry Pi Pico)',
+  'Ctrl+C': 'Ctrl+C',
+  'socket': 'socket',
 };

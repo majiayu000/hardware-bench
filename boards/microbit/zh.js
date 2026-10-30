@@ -47,7 +47,7 @@ export default {
   'The numbers on the board match the key': '板上的编号和图例一一对应',
   'Specifications': '规格参数',
   'Processor': '处理器',
-  'nRF52833, Arm Cortex-M4, 64 MHz': 'nRF52833，Arm Cortex-M4，64 MHz',
+  'nRF52833, Arm Cortex-M4, 64 MHz': 'nRF52833，Arm Cortex-M4，主频 64 MHz',
   'Memory': '内存',
   '128 KB RAM, 512 KB flash': '128 KB 内存，512 KB 闪存',
   'Display': '显示屏',
@@ -169,4 +169,9 @@ export default {
   'Shows a tick on arrival.': '收到时显示对勾。',
   'The panel plays both boards: one sends, the other receives.': '面板同时演示两块板子：一块发送，另一块接收。',
   'Both run the same program.': '两块运行同一个程序。',
+  // names kept in English
+  'BBC micro:bit': 'BBC micro:bit',
+  'MicroPython': 'MicroPython',
+  'python.microbit.org': 'python.microbit.org',
+  'Send to micro:bit': 'Send to micro:bit',
 };

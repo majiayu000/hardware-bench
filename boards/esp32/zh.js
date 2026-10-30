@@ -180,4 +180,13 @@ export default {
   // pin descriptions
   '3.3 V power supply': '3.3 V 电源', 'CHIP_PU, Reset': 'CHIP_PU，复位', '5 V power supply': '5 V 电源', 'GPIO0, ADC2_CH1, TOUCH_CH1, Boot': 'GPIO0，ADC2_CH1，TOUCH_CH1，Boot 键',
   'Serial · MicroPython REPL · 115200 baud': '串口 · MicroPython REPL · 115200 波特率',
+  // names kept in English
+  'mpremote': 'mpremote',
+  'Ctrl+]': 'Ctrl+]',
+  '`mpremote`': '`mpremote`',
+  '`mpremote exec "…"`': '`mpremote exec "…"`',
+  '`mpremote run file.py`': '`mpremote run file.py`',
+  '`mpremote cp file.py :main.py`': '`mpremote cp file.py :main.py`',
+  '`mpremote ls`': '`mpremote ls`',
+  '`mpremote reset`': '`mpremote reset`',
 };

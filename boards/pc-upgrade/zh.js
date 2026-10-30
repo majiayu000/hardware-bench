@@ -221,4 +221,6 @@ export default {
   'New drives': '新硬盘',
   'Listed in setup, then initialised.': '先在设置里确认，再初始化。',
   'Nothing extra': '不需要额外材料',
+  // names kept in English
+  'M-key NVMe': 'M-key NVMe',
 };

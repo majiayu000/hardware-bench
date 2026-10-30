@@ -239,4 +239,6 @@ export default {
   'Unscrew the four screws at the rear and slide out the **power supply**.': '拧下后面的四颗螺丝，抽出**电源**。',
   'Empty case: everything is back on the bench.': '机箱空了：所有零件都回到了工作台上。',
   'Screwdriver and small cups for screws': '螺丝刀和装螺丝的小杯',
+  // names kept in English
+  'ATX、Micro-ATX、Mini-ITX': 'ATX、Micro-ATX、Mini-ITX',
 };

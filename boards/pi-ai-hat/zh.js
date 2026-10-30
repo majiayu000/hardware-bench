@@ -197,4 +197,11 @@ export default {
   'Give me three ideas for a Raspberry Pi project.': '给我三个树莓派项目的点子。',
   '1. A weather station that logs temperature and humidity. 2. A camera that tells you when a parcel arrives. 3. A voice assistant that runs offline.': '1. 记录温湿度的气象站。2. 快递到了会提醒你的摄像头。3. 离线运行的语音助手。',
   'Nothing extra: requests comes with Raspberry Pi OS': '不需要额外安装：Raspberry Pi OS 自带 requests',
+  // names kept in English
+  'Ctrl+C': 'Ctrl+C',
+  '30 fps': '30 fps',
+  'Hailo': 'Hailo',
+  'GenAI Model Zoo': 'GenAI Model Zoo',
+  'Qwen2 1.5B': 'Qwen2 1.5B',
+  'messages': 'messages',
 };

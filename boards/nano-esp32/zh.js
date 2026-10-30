@@ -12,7 +12,7 @@ export default {
   'Serial (RX/TX)': '串口（RX/TX）',
   'Analog / I²C': '模拟 / I²C',
   'Reset / boot': '复位 / 启动',
-  'u-blox NORA-W106 (ESP32-S3)': 'u-blox NORA-W106（ESP32-S3）',
+  'u-blox NORA-W106 (ESP32-S3)': 'u-blox NORA-W106 模组（ESP32-S3）',
   'The ESP32-S3 in a module with Wi-Fi and Bluetooth: two cores at up to 240 MHz, 512 KB of RAM and 8 MB of PSRAM.': '装在模组里的 ESP32-S3，带 Wi-Fi 和蓝牙：两个最高 240 MHz 的核心、512 KB 内存和 8 MB PSRAM。',
   '16 MB flash': '16 MB 闪存',
   'External flash memory for your sketch and files.': '外置闪存，存放你的程序和文件。',
@@ -44,7 +44,7 @@ export default {
   'Every pin is **3.3 V**, and there is **no 5 V pin**: VBUS gives 5 V only while USB is plugged in. Never connect 5 V signals to a pin.': '所有引脚都是 **3.3 V**，而且**没有 5 V 引脚**：只有插着 USB 时 VBUS 才有 5 V。千万不要把 5 V 信号接到引脚上。',
   'Specifications': '规格参数',
   'Chip': '芯片',
-  'ESP32-S3 (u-blox NORA-W106)': 'ESP32-S3（u-blox NORA-W106）',
+  'ESP32-S3 (u-blox NORA-W106)': 'ESP32-S3（u-blox NORA-W106 模组）',
   'Memory': '内存',
   '512 KB RAM, 8 MB PSRAM, 16 MB flash': '512 KB 内存，8 MB PSRAM，16 MB 闪存',
   'Wireless': '无线',
@@ -211,4 +211,7 @@ export default {
   'Nano weather': 'Nano 天气',
   'The BME280 circuit from the I²C lesson': 'I²C 一课里的 BME280 电路',
   'USB phone charger': 'USB 手机充电器',
+  // names kept in English
+  'Nano ESP32': 'Nano ESP32',
+  'Adafruit BME280 Library': 'Adafruit BME280 Library',
 };
