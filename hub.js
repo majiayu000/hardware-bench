@@ -68,7 +68,7 @@ $('#themeToggle').addEventListener('click', () => {
 });
 
 observe(document.body);
-document.title = t('Hardware Bench');
+document.title = lang === 'zh' ? '硬件学堂：Arduino、ESP32 与树莓派互动课程' : 'Hardware Bench: Interactive Arduino, ESP32 and Raspberry Pi Courses';
 $('#langToggle').textContent = lang === 'zh' ? 'EN' : '中';
 $('#langToggle').addEventListener('click', () => setLang(lang === 'zh' ? 'en' : 'zh'));
 renderComing();
